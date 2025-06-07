@@ -26,9 +26,9 @@ const Navbar: React.FC = () => {
           <div className="flex-shrink-0">
             <button
               onClick={() => scrollToSection('hero')}
-              className="text-2xl font-bold text-white hover:text-red-400 transition-colors font-mono focus:outline-none"
+              className="text-2xl font-bold text-white hover:text-accent-red transition-colors font-mono focus:outline-none"
             >
-              aw.
+              <span className="text-accent-red">aw.</span>
             </button>
           </div>
 
@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
                 onClick={() => scrollToSection('about')}
                 className={`px-3 py-2 text-sm font-medium transition-colors focus:outline-none ${
                   activeSection === 'about' 
-                    ? 'text-orange-400' 
+                    ? 'text-accent-red' 
                     : 'text-gray-300 hover:text-white'
                 }`}
               >
@@ -49,7 +49,7 @@ const Navbar: React.FC = () => {
                 onClick={() => scrollToSection('projects')}
                 className={`px-3 py-2 text-sm font-medium transition-colors focus:outline-none ${
                   activeSection === 'projects' 
-                    ? 'text-orange-400' 
+                    ? 'text-accent-red' 
                     : 'text-gray-300 hover:text-white'
                 }`}
               >
@@ -59,7 +59,7 @@ const Navbar: React.FC = () => {
                 onClick={() => scrollToSection('services')}
                 className={`px-3 py-2 text-sm font-medium transition-colors focus:outline-none ${
                   activeSection === 'services' 
-                    ? 'text-orange-400' 
+                    ? 'text-accent-red' 
                     : 'text-gray-300 hover:text-white'
                 }`}
               >
@@ -69,7 +69,7 @@ const Navbar: React.FC = () => {
                 onClick={() => scrollToSection('community')}
                 className={`px-3 py-2 text-sm font-medium transition-colors focus:outline-none ${
                   activeSection === 'community' 
-                    ? 'text-orange-400' 
+                    ? 'text-accent-red' 
                     : 'text-gray-300 hover:text-white'
                 }`}
               >
@@ -79,7 +79,7 @@ const Navbar: React.FC = () => {
                 onClick={() => scrollToSection('blog')}
                 className={`px-3 py-2 text-sm font-medium transition-colors focus:outline-none ${
                   activeSection === 'blog' 
-                    ? 'text-orange-400' 
+                    ? 'text-accent-red' 
                     : 'text-gray-300 hover:text-white'
                 }`}
               >
@@ -89,7 +89,7 @@ const Navbar: React.FC = () => {
                 onClick={() => scrollToSection('contact')}
                 className={`px-3 py-2 text-sm font-medium transition-colors focus:outline-none ${
                   activeSection === 'contact' 
-                    ? 'text-orange-400' 
+                    ? 'text-accent-red' 
                     : 'text-gray-300 hover:text-white'
                 }`}
               >
@@ -123,7 +123,7 @@ const Navbar: React.FC = () => {
                 onClick={() => scrollToSection('about')}
                 className={`block px-3 py-2 text-base font-medium w-full text-left transition-colors focus:outline-none ${
                   activeSection === 'about' 
-                    ? 'text-orange-400' 
+                    ? 'text-accent-red' 
                     : 'text-gray-300 hover:text-white'
                 }`}
               >
@@ -133,7 +133,7 @@ const Navbar: React.FC = () => {
                 onClick={() => scrollToSection('projects')}
                 className={`block px-3 py-2 text-base font-medium w-full text-left transition-colors focus:outline-none ${
                   activeSection === 'projects' 
-                    ? 'text-orange-400' 
+                    ? 'text-accent-red' 
                     : 'text-gray-300 hover:text-white'
                 }`}
               >
@@ -143,7 +143,7 @@ const Navbar: React.FC = () => {
                 onClick={() => scrollToSection('services')}
                 className={`block px-3 py-2 text-base font-medium w-full text-left transition-colors focus:outline-none ${
                   activeSection === 'services' 
-                    ? 'text-orange-400' 
+                    ? 'text-accent-red' 
                     : 'text-gray-300 hover:text-white'
                 }`}
               >
@@ -153,7 +153,7 @@ const Navbar: React.FC = () => {
                 onClick={() => scrollToSection('community')}
                 className={`block px-3 py-2 text-base font-medium w-full text-left transition-colors focus:outline-none ${
                   activeSection === 'community' 
-                    ? 'text-orange-400' 
+                    ? 'text-accent-red' 
                     : 'text-gray-300 hover:text-white'
                 }`}
               >
@@ -163,7 +163,7 @@ const Navbar: React.FC = () => {
                 onClick={() => scrollToSection('blog')}
                 className={`block px-3 py-2 text-base font-medium w-full text-left transition-colors focus:outline-none ${
                   activeSection === 'blog' 
-                    ? 'text-orange-400' 
+                    ? 'text-accent-red' 
                     : 'text-gray-300 hover:text-white'
                 }`}
               >
@@ -173,7 +173,7 @@ const Navbar: React.FC = () => {
                 onClick={() => scrollToSection('contact')}
                 className={`block px-3 py-2 text-base font-medium w-full text-left transition-colors focus:outline-none ${
                   activeSection === 'contact' 
-                    ? 'text-orange-400' 
+                    ? 'text-accent-red' 
                     : 'text-gray-300 hover:text-white'
                 }`}
               >

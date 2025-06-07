@@ -70,11 +70,11 @@ const Hero = () => {
   }, [animationComplete])
 
   return (
-    <section className="min-h-screen flex flex-col justify-start md:justify-center items-start px-6 md:px-12 lg:px-24 pt-32 sm:pt-40 md:pt-20 lg:pt-0">
+    <section className="min-h-screen flex flex-col justify-start md:justify-center items-start px-6 md:px-12 lg:px-24 pt-28 sm:pt-32 md:pt-24 lg:pt-0">
       <div className="w-full max-w-5xl">
         {/* IP Address Line */}
         <div className="font-mono text-lg md:text-xl lg:text-2xl font-medium mb-3 md:mb-4">
-          <span className="text-light-text">Hi </span>
+          <span className="text-light-text">Hi, </span>
           <span className="text-accent-red">{userIP}</span>
         </div>
         
@@ -88,7 +88,16 @@ const Hero = () => {
         
         {/* Third Line with Typewriter */}
         <div className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-light-text leading-tight">
-          <span>{displayedThirdLine}</span>
+          <span>
+            {displayedThirdLine.split('').map((char, index) => (
+              <span 
+                key={index} 
+                className={char === '&' ? 'text-accent-red' : 'text-light-text'}
+              >
+                {char}
+              </span>
+            ))}
+          </span>
           {showThirdCursor && !thirdLineComplete && (
             <span className="typewriter-cursor text-light-text">|</span>
           )}
