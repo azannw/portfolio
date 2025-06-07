@@ -11,14 +11,14 @@ const projects: Project[] = [
   {
     title: 'UniCalc',
     description: 'University merit calculator helping students calculate admission chances',
-    link: 'https://github.com/azan/unicalc',
-    type: 'live'
+    link: 'https://github.com/azannw/unicalc',
+    type: 'github'
   },
   {
-    title: 'StrikeLock Website',
+    title: 'StrikeLock',
     description: 'Professional website for a war/OSINT company with modern design',
-    link: 'https://strikelock.com',
-    type: 'live'
+    link: 'https://github.com/azannw/strikelock',
+    type: 'github'
   },
   {
     title: 'CS Connect Pakistan',
@@ -27,9 +27,9 @@ const projects: Project[] = [
     type: 'github'
   },
   {
-    title: 'Podcast Production Suite',
-    description: 'Tools and automation for podcast recording, editing, and distribution',
-    link: 'https://github.com/azan/podcast-suite',
+    title: 'Fast Aggregate Calculator',
+    description: 'High-performance calculator for computing aggregates and statistical metrics efficiently',
+    link: 'https://github.com/azannw/fast-aggregate-calculator',
     type: 'github'
   }
 ]

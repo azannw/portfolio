@@ -105,11 +105,18 @@ html {
   color: #1a1a1a;
 }
 
-/* Focus styles */
+/* Remove focus outlines and prevent orange box on click */
+*:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+button:focus,
+button:active,
 a:focus,
-button:focus {
-  outline: 2px solid #ff4c4c;
-  outline-offset: 2px;
+a:active {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* Improved hover transitions */

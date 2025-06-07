@@ -2,12 +2,19 @@ import React, { useState } from 'react';
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
       setIsMenuOpen(false);
+      setActiveSection(sectionId);
+      
+      // Keep the active state for a brief moment to show the orange color
+      setTimeout(() => {
+        setActiveSection('');
+      }, 1000);
     }
   };
 
@@ -30,37 +37,61 @@ const Navbar: React.FC = () => {
             <div className="ml-10 flex items-baseline space-x-8">
               <button
                 onClick={() => scrollToSection('about')}
-                className="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors focus:outline-none"
+                className={`px-3 py-2 text-sm font-medium transition-colors focus:outline-none ${
+                  activeSection === 'about' 
+                    ? 'text-orange-400' 
+                    : 'text-gray-300 hover:text-white'
+                }`}
               >
                 About
               </button>
               <button
                 onClick={() => scrollToSection('projects')}
-                className="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors focus:outline-none"
+                className={`px-3 py-2 text-sm font-medium transition-colors focus:outline-none ${
+                  activeSection === 'projects' 
+                    ? 'text-orange-400' 
+                    : 'text-gray-300 hover:text-white'
+                }`}
               >
                 Projects
               </button>
               <button
                 onClick={() => scrollToSection('services')}
-                className="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors focus:outline-none"
+                className={`px-3 py-2 text-sm font-medium transition-colors focus:outline-none ${
+                  activeSection === 'services' 
+                    ? 'text-orange-400' 
+                    : 'text-gray-300 hover:text-white'
+                }`}
               >
                 Services
               </button>
               <button
                 onClick={() => scrollToSection('community')}
-                className="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors focus:outline-none"
+                className={`px-3 py-2 text-sm font-medium transition-colors focus:outline-none ${
+                  activeSection === 'community' 
+                    ? 'text-orange-400' 
+                    : 'text-gray-300 hover:text-white'
+                }`}
               >
                 Community
               </button>
               <button
                 onClick={() => scrollToSection('blog')}
-                className="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors focus:outline-none"
+                className={`px-3 py-2 text-sm font-medium transition-colors focus:outline-none ${
+                  activeSection === 'blog' 
+                    ? 'text-orange-400' 
+                    : 'text-gray-300 hover:text-white'
+                }`}
               >
                 Blog
               </button>
               <button
                 onClick={() => scrollToSection('contact')}
-                className="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors focus:outline-none"
+                className={`px-3 py-2 text-sm font-medium transition-colors focus:outline-none ${
+                  activeSection === 'contact' 
+                    ? 'text-orange-400' 
+                    : 'text-gray-300 hover:text-white'
+                }`}
               >
                 Contact
               </button>
@@ -90,37 +121,61 @@ const Navbar: React.FC = () => {
             <div className="px-2 pt-2 pb-3 space-y-1 bg-gray-900/95 backdrop-blur-sm">
               <button
                 onClick={() => scrollToSection('about')}
-                className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium w-full text-left transition-colors focus:outline-none"
+                className={`block px-3 py-2 text-base font-medium w-full text-left transition-colors focus:outline-none ${
+                  activeSection === 'about' 
+                    ? 'text-orange-400' 
+                    : 'text-gray-300 hover:text-white'
+                }`}
               >
                 About
               </button>
               <button
                 onClick={() => scrollToSection('projects')}
-                className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium w-full text-left transition-colors focus:outline-none"
+                className={`block px-3 py-2 text-base font-medium w-full text-left transition-colors focus:outline-none ${
+                  activeSection === 'projects' 
+                    ? 'text-orange-400' 
+                    : 'text-gray-300 hover:text-white'
+                }`}
               >
                 Projects
               </button>
               <button
                 onClick={() => scrollToSection('services')}
-                className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium w-full text-left transition-colors focus:outline-none"
+                className={`block px-3 py-2 text-base font-medium w-full text-left transition-colors focus:outline-none ${
+                  activeSection === 'services' 
+                    ? 'text-orange-400' 
+                    : 'text-gray-300 hover:text-white'
+                }`}
               >
                 Services
               </button>
               <button
                 onClick={() => scrollToSection('community')}
-                className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium w-full text-left transition-colors focus:outline-none"
+                className={`block px-3 py-2 text-base font-medium w-full text-left transition-colors focus:outline-none ${
+                  activeSection === 'community' 
+                    ? 'text-orange-400' 
+                    : 'text-gray-300 hover:text-white'
+                }`}
               >
                 Community
               </button>
               <button
                 onClick={() => scrollToSection('blog')}
-                className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium w-full text-left transition-colors focus:outline-none"
+                className={`block px-3 py-2 text-base font-medium w-full text-left transition-colors focus:outline-none ${
+                  activeSection === 'blog' 
+                    ? 'text-orange-400' 
+                    : 'text-gray-300 hover:text-white'
+                }`}
               >
                 Blog
               </button>
               <button
                 onClick={() => scrollToSection('contact')}
-                className="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium w-full text-left transition-colors focus:outline-none"
+                className={`block px-3 py-2 text-base font-medium w-full text-left transition-colors focus:outline-none ${
+                  activeSection === 'contact' 
+                    ? 'text-orange-400' 
+                    : 'text-gray-300 hover:text-white'
+                }`}
               >
                 Contact
               </button>

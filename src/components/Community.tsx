@@ -1,9 +1,9 @@
 const Community = () => {
   const stats = [
-    { label: 'Active Members', value: '2,500+' },
-    { label: 'Universities', value: '15+' },
-    { label: 'Events Hosted', value: '50+' },
-    { label: 'Success Stories', value: '100+' }
+    { label: 'Active Members', value: '2,000+' },
+    { label: 'Universities', value: '50+' },
+    { label: 'Events Hosted', value: '5+' },
+    { label: 'Success Stories', value: '10+' }
   ]
 
   const features = [
@@ -95,7 +95,7 @@ const Community = () => {
                   Connect with fellow CS students, share knowledge, and grow together in Pakistan's 
                   most active tech community.
                 </p>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-row gap-3">
                   <a 
                     href="https://discord.gg/gWyvnmSRRF" 
                     className="inline-flex items-center px-4 py-2 bg-accent-red text-white font-mono text-sm rounded hover:bg-red-600 transition-colors"
@@ -103,7 +103,7 @@ const Community = () => {
                     Join Discord
                   </a>
                   <a 
-                    href="#" 
+                    href="https://chat.whatsapp.com/IM8Yw2D2Fv2EwbHqnCqVhn" 
                     className="inline-flex items-center px-4 py-2 border border-gray-600 text-gray-300 font-mono text-sm rounded hover:border-gray-500 transition-colors"
                   >
                     WhatsApp Community
