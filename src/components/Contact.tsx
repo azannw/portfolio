@@ -29,39 +29,39 @@ const Contact = () => {
           ~/contact
         </h2>
         
-        <div className="space-y-8">
+        <div className="space-y-6 md:space-y-8">
           {/* Email */}
-          <div className="font-mono">
+          <div className="font-mono text-sm md:text-base">
             <span className="text-accent-red">$</span>
             <span className="text-light-text ml-2">echo "itsazanwaseem@gmail.com" | mail</span>
           </div>
           
           <div className="ml-4 border-l-2 border-gray-600 pl-4">
-            <p className="font-sans text-lg text-gray-400 mb-8">
+            <p className="font-sans text-base md:text-lg text-gray-400 mb-6 md:mb-8 leading-relaxed">
               Let's connect! Whether you want to collaborate on a project, discuss tech, 
               or just say hello, I'm always open to interesting conversations.
             </p>
             
             <div className="space-y-6">
               <div>
-                <h3 className="font-mono text-lg font-semibold text-light-text mb-4">
+                <h3 className="font-mono text-base md:text-lg font-semibold text-light-text mb-4">
                   Email
                 </h3>
                 <a 
                   href="https://mail.google.com/mail/?view=cm&fs=1&to=itsazanwaseem@gmail.com" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-accent-red hover:underline transition-colors text-lg"
+                  className="font-mono text-accent-red hover:underline transition-colors text-base md:text-lg break-all"
                 >
                   itsazanwaseem@gmail.com
                 </a>
               </div>
               
               <div>
-                <h3 className="font-mono text-lg font-semibold text-light-text mb-4">
+                <h3 className="font-mono text-base md:text-lg font-semibold text-light-text mb-4">
                   Social
                 </h3>
-                <div className="flex space-x-6">
+                <div className="flex flex-wrap gap-4 md:gap-6">
                   {socialLinks.map((social, index) => (
                     <a
                       key={index}

@@ -44,7 +44,7 @@ const Projects = () => {
           ~/projects
         </h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {projects.map((project, index) => (
             <div
               key={index}
@@ -52,16 +52,16 @@ const Projects = () => {
               onMouseEnter={() => setHoveredProject(index)}
               onMouseLeave={() => setHoveredProject(null)}
             >
-              <div className="font-mono mb-2">
+              <div className="font-mono mb-2 text-sm md:text-base">
                 <span className="text-accent-red">$</span>
                 <span className="text-light-text ml-2">ls -la {project.title.toLowerCase().replace(/\s+/g, '-')}</span>
               </div>
               
               <div className="ml-4 border-l-2 border-gray-600 pl-4 pb-6">
-                <h3 className="font-display text-xl font-semibold text-light-text mb-3 group-hover:text-accent-red transition-colors">
+                <h3 className="font-display text-lg md:text-xl font-semibold text-light-text mb-3 group-hover:text-accent-red transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-gray-400 mb-4 font-sans leading-relaxed">
+                <p className="text-gray-400 mb-4 font-sans leading-relaxed text-sm md:text-base">
                   {project.description}
                 </p>
                 

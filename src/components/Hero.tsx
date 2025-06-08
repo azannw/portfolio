@@ -70,7 +70,7 @@ const Hero = () => {
   }, [animationComplete])
 
   return (
-    <section className="min-h-screen flex flex-col justify-start md:justify-center items-start px-6 md:px-12 lg:px-24 pt-28 sm:pt-32 md:pt-24 lg:pt-0">
+    <section className="min-h-[52vh] md:min-h-screen flex flex-col justify-start md:justify-center items-start px-6 md:px-12 lg:px-24 pt-28 sm:pt-32 md:pt-24 lg:pt-0">
       <div className="w-full max-w-5xl">
         {/* IP Address Line */}
         <div className="font-mono text-lg md:text-xl lg:text-2xl font-medium mb-3 md:mb-4">

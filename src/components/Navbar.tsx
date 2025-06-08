@@ -40,7 +40,7 @@ const Navbar: React.FC = () => {
                 className={`px-3 py-2 text-sm font-medium transition-colors focus:outline-none ${
                   activeSection === 'about' 
                     ? 'text-accent-red' 
-                    : 'text-gray-300 hover:text-white'
+                    : 'text-gray-300 hover:text-accent-red'
                 }`}
               >
                 About
@@ -50,7 +50,7 @@ const Navbar: React.FC = () => {
                 className={`px-3 py-2 text-sm font-medium transition-colors focus:outline-none ${
                   activeSection === 'projects' 
                     ? 'text-accent-red' 
-                    : 'text-gray-300 hover:text-white'
+                    : 'text-gray-300 hover:text-accent-red'
                 }`}
               >
                 Projects
@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
                 className={`px-3 py-2 text-sm font-medium transition-colors focus:outline-none ${
                   activeSection === 'services' 
                     ? 'text-accent-red' 
-                    : 'text-gray-300 hover:text-white'
+                    : 'text-gray-300 hover:text-accent-red'
                 }`}
               >
                 Services
@@ -70,7 +70,7 @@ const Navbar: React.FC = () => {
                 className={`px-3 py-2 text-sm font-medium transition-colors focus:outline-none ${
                   activeSection === 'community' 
                     ? 'text-accent-red' 
-                    : 'text-gray-300 hover:text-white'
+                    : 'text-gray-300 hover:text-accent-red'
                 }`}
               >
                 Community
@@ -80,7 +80,7 @@ const Navbar: React.FC = () => {
                 className={`px-3 py-2 text-sm font-medium transition-colors focus:outline-none ${
                   activeSection === 'blog' 
                     ? 'text-accent-red' 
-                    : 'text-gray-300 hover:text-white'
+                    : 'text-gray-300 hover:text-accent-red'
                 }`}
               >
                 Blog
@@ -90,7 +90,7 @@ const Navbar: React.FC = () => {
                 className={`px-3 py-2 text-sm font-medium transition-colors focus:outline-none ${
                   activeSection === 'contact' 
                     ? 'text-accent-red' 
-                    : 'text-gray-300 hover:text-white'
+                    : 'text-gray-300 hover:text-accent-red'
                 }`}
               >
                 Contact
@@ -124,7 +124,7 @@ const Navbar: React.FC = () => {
                 className={`block px-3 py-2 text-base font-medium w-full text-left transition-colors focus:outline-none ${
                   activeSection === 'about' 
                     ? 'text-accent-red' 
-                    : 'text-gray-300 hover:text-white'
+                    : 'text-gray-300 hover:text-accent-red'
                 }`}
               >
                 About
@@ -134,7 +134,7 @@ const Navbar: React.FC = () => {
                 className={`block px-3 py-2 text-base font-medium w-full text-left transition-colors focus:outline-none ${
                   activeSection === 'projects' 
                     ? 'text-accent-red' 
-                    : 'text-gray-300 hover:text-white'
+                    : 'text-gray-300 hover:text-accent-red'
                 }`}
               >
                 Projects
@@ -144,7 +144,7 @@ const Navbar: React.FC = () => {
                 className={`block px-3 py-2 text-base font-medium w-full text-left transition-colors focus:outline-none ${
                   activeSection === 'services' 
                     ? 'text-accent-red' 
-                    : 'text-gray-300 hover:text-white'
+                    : 'text-gray-300 hover:text-accent-red'
                 }`}
               >
                 Services
@@ -154,7 +154,7 @@ const Navbar: React.FC = () => {
                 className={`block px-3 py-2 text-base font-medium w-full text-left transition-colors focus:outline-none ${
                   activeSection === 'community' 
                     ? 'text-accent-red' 
-                    : 'text-gray-300 hover:text-white'
+                    : 'text-gray-300 hover:text-accent-red'
                 }`}
               >
                 Community
@@ -164,7 +164,7 @@ const Navbar: React.FC = () => {
                 className={`block px-3 py-2 text-base font-medium w-full text-left transition-colors focus:outline-none ${
                   activeSection === 'blog' 
                     ? 'text-accent-red' 
-                    : 'text-gray-300 hover:text-white'
+                    : 'text-gray-300 hover:text-accent-red'
                 }`}
               >
                 Blog
@@ -174,7 +174,7 @@ const Navbar: React.FC = () => {
                 className={`block px-3 py-2 text-base font-medium w-full text-left transition-colors focus:outline-none ${
                   activeSection === 'contact' 
                     ? 'text-accent-red' 
-                    : 'text-gray-300 hover:text-white'
+                    : 'text-gray-300 hover:text-accent-red'
                 }`}
               >
                 Contact
