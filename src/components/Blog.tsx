@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import ReactMarkdown from 'react-markdown'
 import rehypeHighlight from 'rehype-highlight'
 import remarkGfm from 'remark-gfm'
@@ -9,6 +9,7 @@ const Blog = () => {
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null)
   const [posts, setPosts] = useState<BlogPost[]>([])
   const [loading, setLoading] = useState(true)
+  const sectionRef = useRef<HTMLElement>(null)
   
   useEffect(() => {
     const fetchPosts = async () => {
@@ -23,6 +24,25 @@ const Blog = () => {
     }
     
     fetchPosts()
+  }, [])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view')
+          }
+        })
+      },
+      { threshold: 0.1, rootMargin: '-50px' }
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => observer.disconnect()
   }, [])
 
   if (selectedPost) {
@@ -164,7 +184,7 @@ const Blog = () => {
   }
 
   return (
-    <section className="py-12 md:py-16 lg:py-20 px-6 md:px-12 lg:px-24">
+    <section ref={sectionRef} className="scroll-animate py-12 md:py-16 lg:py-20 px-6 md:px-12 lg:px-24">
       <div className="max-w-6xl mx-auto">
         <h2 className="font-mono text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-light-text">
           ~/blog

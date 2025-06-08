@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 interface Service {
   title: string
@@ -9,36 +9,51 @@ interface Service {
 const services: Service[] = [
   {
     title: 'Web Development',
-    description: 'Full-stack web applications with modern frameworks and best practices',
-    skills: ['React', 'TypeScript', 'Node.js', 'TailwindCSS', 'Next.js']
+    description: 'Building modern, responsive websites and web applications with cutting-edge technologies.',
+    skills: ['React', 'TypeScript', 'Node.js', 'Tailwind CSS', 'Next.js']
   },
   {
-    title: 'AI Integration',
-    description: 'Implementing AI solutions and prompt engineering for real-world applications',
-    skills: ['OpenAI API', 'Prompt Engineering', 'LangChain', 'AI Automation']
+    title: 'UI/UX Design',
+    description: 'Creating intuitive and beautiful user interfaces that provide exceptional user experiences.',
+    skills: ['Figma', 'Adobe XD', 'Prototyping', 'User Research', 'Design Systems']
   },
   {
     title: 'Community Building',
-    description: 'Creating and managing tech communities, organizing events and mentorship',
-    skills: ['Discord Management', 'Event Planning', 'Mentorship', 'Content Creation']
+    description: 'Developing and growing tech communities, organizing events, and fostering collaboration.',
+    skills: ['Event Management', 'Social Media', 'Content Creation', 'Networking', 'Leadership']
   },
   {
-    title: 'Podcasting',
-    description: 'Podcast production, hosting, and content strategy for tech audiences',
-    skills: ['Audio Production', 'Content Strategy', 'Interviewing', 'Distribution']
-  },
-  {
-    title: 'Student Guidance',
-    description: 'Helping students with university admissions and career guidance',
-    skills: ['Career Counseling', 'Test Prep', 'University Applications', 'Mentoring']
+    title: 'Technical Writing',
+    description: 'Creating clear, comprehensive documentation and educational content for developers.',
+    skills: ['Documentation', 'Blogging', 'Tutorials', 'API Docs', 'Technical Communication']
   }
 ]
 
 const Services = () => {
   const [hoveredService, setHoveredService] = useState<number | null>(null)
+  const sectionRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view')
+          }
+        })
+      },
+      { threshold: 0.1, rootMargin: '-50px' }
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
 
   return (
-    <section className="py-12 md:py-16 lg:py-20 px-6 md:px-12 lg:px-24">
+    <section ref={sectionRef} className="scroll-animate py-12 md:py-16 lg:py-20 px-6 md:px-12 lg:px-24">
       <div className="max-w-6xl mx-auto">
         <h2 className="font-mono text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-light-text">
           ~/services
