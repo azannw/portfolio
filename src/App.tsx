@@ -6,6 +6,7 @@ import Services from './components/Services'
 import Community from './components/Community'
 import Blog from './components/Blog'
 import Contact from './components/Contact'
+import { Analytics } from '@vercel/analytics/react'
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Contact />
         </div>
       </div>
+      <Analytics />
     </div>
   )
 }
