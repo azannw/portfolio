@@ -9,6 +9,12 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: 'Fast Mock Test',
+    description: 'Interactive mock test platform for FAST University entry test preparation with real-time scoring',
+    link: 'https://fastmock.vercel.app',
+    type: 'live'
+  },
+  {
     title: 'UniCalc',
     description: 'University merit calculator helping students calculate admission chances',
     link: 'https://github.com/azannw/unicalc',

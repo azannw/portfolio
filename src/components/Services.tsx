@@ -23,9 +23,9 @@ const services: Service[] = [
     skills: ['Event Management', 'Social Media', 'Content Creation', 'Networking', 'Leadership']
   },
   {
-    title: 'Technical Writing',
-    description: 'Creating clear, comprehensive documentation and educational content for developers.',
-    skills: ['Documentation', 'Blogging', 'Tutorials', 'API Docs', 'Technical Communication']
+    title: '1:1 Mentoring Sessions',
+    description: 'Personalized mentoring sessions for entry test preparation, career guidance, and academic support for aspiring CS students.',
+    skills: ['Entry Test Prep', 'Career Counseling', 'Academic Support', 'Goal Setting', 'Study Planning']
   }
 ]
 

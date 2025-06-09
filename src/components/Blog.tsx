@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import rehypeHighlight from 'rehype-highlight'
 import remarkGfm from 'remark-gfm'
-import { BlogPost, loadBlogPosts } from '../utils/blogLoader'
+import { BlogPost, loadBlogPosts, getBlogPost } from '../utils/blogLoader'
 import ShareButtons from './ShareButtons'
 
 const Blog = () => {
@@ -10,12 +11,32 @@ const Blog = () => {
   const [posts, setPosts] = useState<BlogPost[]>([])
   const [loading, setLoading] = useState(true)
   const sectionRef = useRef<HTMLElement>(null)
+  const location = useLocation()
+  const navigate = useNavigate()
   
+  // Extract slug from URL path like /blog/post-slug
+  const getBlogSlugFromPath = (pathname: string) => {
+    const matches = pathname.match(/^\/blog\/(.+)$/)
+    return matches ? matches[1] : null
+  }
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         const blogPosts = await loadBlogPosts()
         setPosts(blogPosts)
+        
+        // Check if we're on a specific blog post URL
+        const slug = getBlogSlugFromPath(location.pathname)
+        if (slug) {
+          const post = await getBlogPost(slug)
+          if (post) {
+            setSelectedPost(post)
+          } else {
+            // If blog post not found, redirect to main blog section
+            navigate('/#blog')
+          }
+        }
       } catch (error) {
         console.error('Error loading blog posts:', error)
       } finally {
@@ -24,7 +45,18 @@ const Blog = () => {
     }
     
     fetchPosts()
-  }, [])
+  }, [location.pathname, navigate])
+
+  const handlePostClick = (post: BlogPost) => {
+    setSelectedPost(post)
+    // Update URL without page reload
+    navigate(`/blog/${post.slug}`)
+  }
+
+  const handleBackToPosts = () => {
+    setSelectedPost(null)
+    navigate('/#blog')
+  }
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -50,7 +82,7 @@ const Blog = () => {
       <section className="min-h-screen py-12 md:py-16 lg:py-20 px-6 md:px-12 lg:px-24 bg-dark-bg">
         <div className="max-w-4xl mx-auto">
           <button
-            onClick={() => setSelectedPost(null)}
+            onClick={handleBackToPosts}
             className="font-mono text-accent-red hover:underline mb-8 flex items-center transition-colors"
           >
             ← back to posts
@@ -158,7 +190,7 @@ const Blog = () => {
             <div className="mt-12 mb-8">
               <ShareButtons 
                 title={selectedPost.title}
-                url={window.location.href}
+                url={`${window.location.origin}/blog/${selectedPost.slug}`}
               />
             </div>
             
@@ -166,11 +198,13 @@ const Blog = () => {
             <div className="mt-8">
               <button
                 onClick={() => {
-                  setSelectedPost(null);
-                  const heroElement = document.getElementById('hero');
-                  if (heroElement) {
-                    heroElement.scrollIntoView({ behavior: 'smooth' });
-                  }
+                  navigate('/');
+                  setTimeout(() => {
+                    const heroElement = document.getElementById('hero');
+                    if (heroElement) {
+                      heroElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }, 100);
                 }}
                 className="font-mono text-accent-red hover:underline transition-colors flex items-center gap-2"
               >
@@ -207,7 +241,7 @@ const Blog = () => {
               <article
                 key={post.id}
                 className="cursor-pointer group"
-                onClick={() => setSelectedPost(post)}
+                onClick={() => handlePostClick(post)}
               >
                 <div className="font-mono mb-2">
                   <span className="text-accent-red">$</span>
