@@ -1,29 +1,6 @@
 import { useEffect, useRef } from 'react'
 
 const Contact = () => {
-  const socialLinks = [
-    {
-      name: 'GitHub',
-      url: 'https://github.com/azannw',
-      icon: 'github'
-    },
-    {
-      name: 'LinkedIn',
-      url: 'https://linkedin.com/in/azanw',
-      icon: 'linkedin'
-    },
-    {
-      name: 'Instagram',
-      url: 'https://instagram.com/csconnectpk',
-      icon: 'instagram'
-    },
-    {
-      name: 'YouTube',
-      url: 'https://youtube.com/@csconnectpk',
-      icon: 'youtube'
-    }
-  ]
-
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
