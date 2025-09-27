@@ -56,16 +56,6 @@ const Navbar: React.FC = () => {
                 Projects
               </button>
               <button
-                onClick={() => scrollToSection('experience')}
-                className={`px-3 py-2 text-base font-medium transition-colors focus:outline-none ${
-                  activeSection === 'experience' 
-                    ? 'text-accent-red' 
-                    : 'text-gray-300 hover:text-accent-red'
-                }`}
-              >
-                Experience
-              </button>
-              <button
                 onClick={() => scrollToSection('community')}
                 className={`px-3 py-2 text-base font-medium transition-colors focus:outline-none ${
                   activeSection === 'community' 
@@ -138,16 +128,6 @@ const Navbar: React.FC = () => {
                 }`}
               >
                 Projects
-              </button>
-              <button
-                onClick={() => scrollToSection('experience')}
-                className={`block px-3 py-2 text-base font-medium w-full text-left transition-colors focus:outline-none ${
-                  activeSection === 'experience' 
-                    ? 'text-accent-red' 
-                    : 'text-gray-300 hover:text-accent-red'
-                }`}
-              >
-                Experience
               </button>
               <button
                 onClick={() => scrollToSection('community')}
