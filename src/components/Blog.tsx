@@ -93,7 +93,7 @@ const Blog = () => {
               <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-light-text mb-6 leading-tight">
                 {selectedPost.title}
               </h1>
-              <div className="font-mono text-gray-400 text-sm">
+              <div className="font-mono text-gray-400 text-base">
                 Published on {new Date(selectedPost.date).toLocaleDateString('en-US', {
                   year: 'numeric',
                   month: 'long',
@@ -152,7 +152,7 @@ const Blog = () => {
                     const isInline = !className
                     if (isInline) {
                       return (
-                        <code className="bg-gray-800 text-accent-red px-2 py-1 rounded font-mono text-sm border border-gray-700">
+                        <code className="bg-gray-800 text-accent-red px-2 py-1 rounded font-mono text-base border border-gray-700">
                           {children}
                         </code>
                       )
@@ -220,7 +220,7 @@ const Blog = () => {
   return (
     <section ref={sectionRef} className="scroll-animate py-12 md:py-16 lg:py-20 px-6 md:px-12 lg:px-24">
       <div className="max-w-6xl mx-auto">
-        <h2 className="font-mono text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-light-text">
+        <h2 className="font-mono text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-light-text">
           ~/blog
         </h2>
         
@@ -255,7 +255,7 @@ const Blog = () => {
                   <p className="text-gray-400 mb-3 font-sans leading-relaxed">
                     {post.excerpt}
                   </p>
-                  <p className="font-mono text-sm text-gray-500">
+                  <p className="font-mono text-base text-gray-500">
                     {new Date(post.date).toLocaleDateString()}
                   </p>
                 </div>

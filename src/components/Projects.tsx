@@ -66,7 +66,7 @@ const Projects = () => {
   return (
     <section ref={sectionRef} className="scroll-animate py-12 md:py-16 lg:py-20 px-6 md:px-12 lg:px-24">
       <div className="max-w-6xl mx-auto">
-        <h2 className="font-mono text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-light-text">
+        <h2 className="font-mono text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-light-text">
           ~/projects
         </h2>
         
@@ -78,16 +78,16 @@ const Projects = () => {
               onMouseEnter={() => setHoveredProject(index)}
               onMouseLeave={() => setHoveredProject(null)}
             >
-              <div className="font-mono mb-2 text-sm md:text-base">
+              <div className="font-mono mb-2 text-lg md:text-xl">
                 <span className="text-accent-red">$</span>
                 <span className="text-light-text ml-2">ls -la {project.title.toLowerCase().replace(/\s+/g, '-')}</span>
               </div>
               
               <div className="ml-4 border-l-2 border-gray-600 pl-4 pb-6">
-                <h3 className="font-display text-lg md:text-xl font-semibold text-light-text mb-3 group-hover:text-accent-red transition-colors">
+                <h3 className="font-display text-2xl md:text-3xl font-semibold text-light-text mb-3 group-hover:text-accent-red transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-gray-400 mb-4 font-sans leading-relaxed text-sm md:text-base">
+                <p className="text-gray-400 mb-4 font-sans leading-relaxed text-lg md:text-xl">
                   {project.description}
                 </p>
                 
@@ -96,7 +96,7 @@ const Projects = () => {
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center font-mono text-sm text-accent-red hover:underline transition-all duration-200"
+                    className="inline-flex items-center font-mono text-lg text-accent-red hover:underline transition-all duration-200"
                   >
                     {project.type === 'github' ? '→ view source' : '→ visit site'}
                   </a>

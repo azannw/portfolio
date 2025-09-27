@@ -2,10 +2,8 @@ import { useEffect, useRef } from 'react'
 
 const Community = () => {
   const stats = [
-    { label: 'Active Members', value: '2,000+' },
-    { label: 'Universities', value: '50+' },
-    { label: 'Events Hosted', value: '5+' },
-    { label: 'Success Stories', value: '10+' }
+    { label: 'Active Members', value: '3,000+' },
+    { label: 'Universities', value: '50+' }
   ]
 
   const features = [
@@ -41,20 +39,20 @@ const Community = () => {
   return (
     <section ref={sectionRef} className="scroll-animate py-12 md:py-16 lg:py-20 px-6 md:px-12 lg:px-24">
       <div className="max-w-6xl mx-auto">
-        <h2 className="font-mono text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-light-text">
+        <h2 className="font-mono text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-light-text">
           ~/community
         </h2>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
           {/* Community Description */}
           <div>
-            <div className="font-mono mb-4">
+            <div className="font-mono mb-4 text-lg md:text-xl">
               <span className="text-accent-red">$</span>
               <span className="text-light-text ml-2">cat cs-connect-pakistan.md</span>
             </div>
             
             <div className="ml-4 border-l-2 border-gray-600 pl-4">
-              <h3 className="font-display text-xl md:text-2xl font-bold text-light-text mb-4">
+              <h3 className="font-display text-2xl md:text-3xl font-bold text-light-text mb-4">
                 CS Connect Pakistan
               </h3>
               <div className="mb-4">
@@ -62,26 +60,26 @@ const Community = () => {
                   href="https://csconnect.pk" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-accent-red hover:underline transition-colors text-sm md:text-base"
+                  className="font-mono text-accent-red hover:underline transition-colors text-lg md:text-xl"
                 >
                   → csconnect.pk
                 </a>
               </div>
-              <p className="text-gray-400 mb-6 font-sans leading-relaxed text-base md:text-lg">
+              <p className="text-gray-400 mb-6 font-sans leading-relaxed text-xl md:text-2xl">
                 Pakistan's largest Computer Science student community, connecting aspiring developers, 
                 researchers, and tech enthusiasts across the country. We bridge the gap between 
                 academic learning and industry requirements.
               </p>
               
               <div className="space-y-3">
-                <h4 className="font-mono text-base md:text-lg font-semibold text-light-text">
+                <h4 className="font-mono text-xl md:text-2xl font-semibold text-light-text">
                   What we offer:
                 </h4>
                 <ul className="space-y-3">
                   {features.map((feature, index) => (
                     <li key={index} className="flex items-start">
                       <span className="text-accent-red mr-3 flex-shrink-0 mt-0.5">→</span>
-                      <span className="text-gray-400 font-sans text-sm md:text-base leading-relaxed">{feature}</span>
+                      <span className="text-gray-400 font-sans text-lg md:text-xl leading-relaxed">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -103,7 +101,7 @@ const Community = () => {
                     <div className="font-mono text-xl md:text-2xl lg:text-3xl font-bold text-accent-red mb-2">
                       {stat.value}
                     </div>
-                    <div className="font-sans text-xs md:text-sm text-gray-400 leading-tight">
+                    <div className="font-sans text-sm md:text-base text-gray-400 leading-tight">
                       {stat.label}
                     </div>
                   </div>
@@ -111,10 +109,10 @@ const Community = () => {
               </div>
               
               <div className="mt-6 md:mt-8 p-4 bg-gray-900/30 rounded-lg border border-gray-800">
-                <h4 className="font-mono text-base md:text-lg font-semibold text-light-text mb-3">
+                <h4 className="font-mono text-lg md:text-xl font-semibold text-light-text mb-3">
                   Join the Community
                 </h4>
-                <p className="text-gray-400 font-sans text-sm leading-relaxed mb-4">
+                <p className="text-gray-400 font-sans text-base leading-relaxed mb-4">
                   Connect with fellow CS students, share knowledge, and grow together in Pakistan's 
                   most active tech community.
                 </p>
@@ -128,13 +126,13 @@ const Community = () => {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-3">
                         <div className="font-mono text-accent-red">
-                          <span className="text-sm">$</span>
+                          <span className="text-base">$</span>
                         </div>
                         <div>
-                          <div className="font-mono text-sm md:text-base text-light-text group-hover:text-accent-red transition-colors">
+                          <div className="font-mono text-base md:text-lg text-light-text group-hover:text-accent-red transition-colors">
                             → join discord
                           </div>
-                          <div className="font-sans text-xs text-gray-400 mt-1">
+                          <div className="font-sans text-sm text-gray-400 mt-1">
                             Real-time discussions & events
                           </div>
                         </div>
@@ -148,7 +146,7 @@ const Community = () => {
                   </a>
                   
                   <a 
-                    href="https://chat.whatsapp.com/IM8Yw2D2Fv2EwbHqnCqVhn"
+                    href="https://chat.whatsapp.com/IM8Yw2D2Fv2EwbHqnCqVh"
                     target="_blank"
                     rel="noopener noreferrer" 
                     className="group block w-full p-3 bg-gray-800/50 border border-gray-600/50 rounded-lg hover:bg-gray-700/50 hover:border-gray-500/70 transition-all duration-300"
@@ -156,13 +154,13 @@ const Community = () => {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-3">
                         <div className="font-mono text-accent-red">
-                          <span className="text-sm">$</span>
+                          <span className="text-base">$</span>
                         </div>
                         <div>
-                          <div className="font-mono text-sm md:text-base text-light-text group-hover:text-green-400 transition-colors">
+                          <div className="font-mono text-base md:text-lg text-light-text group-hover:text-green-400 transition-colors">
                             → whatsapp community
                           </div>
-                          <div className="font-sans text-xs text-gray-400 mt-1">
+                          <div className="font-sans text-sm text-gray-400 mt-1">
                             Quick updates & announcements
                           </div>
                         </div>
