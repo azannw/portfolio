@@ -7,7 +7,7 @@ const blogPosts = [
     title: 'Why and How to Learn Tech as a Medical Student',
     date: '2025-01-16',
     slug: 'why-how-learn-tech-medical-student',
-    excerpt: 'Want to stand out from thousands of other medical students? Discover how learning tech can give you multiple career pathways, reduce stress, and open doors most medical students never even know exist.',
+    excerpt: 'Want to stand out from thousands of other medical students? Discover how learning tech can give you multiple career pathways.',
     content: `If you're a medical student feeling uncertain about your career path, watching seniors struggle to find good opportunities, or simply curious about how technology is changing healthcare, you're in the right place.
 
 Let's be honest about the current situation. Many doctors are unemployed or not getting the job they desired for. You've probably heard the usual advice: "Try the USMLE pathway," "Open your own clinic," or "Start a hospital." But anyone actually in the field knows exactly how practical these suggestions really are. Some pathways are incredibly expensive, others are oversaturated, and many are extremely time-consuming with no guarantee of success.
@@ -231,297 +231,139 @@ The road is not easy, but it is clear. Stay consistent. Practice with purpose. U
 ];
 
 // ===================================
-// State Variables
+// App Initialization
 // ===================================
-let activeSection = '';
-let isMenuOpen = false;
-
-// ===================================
-// DOM Ready
-// ===================================
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
   initializeApp();
 });
 
 function initializeApp() {
-  // Initialize all features
   fetchUserIP();
-  startTypewriterAnimation();
-  initScrollAnimations();
+  startTypewriter();
+  startUptimeCounter();
   renderBlogPosts();
-
-  // Check if we're on a blog post page via hash
-  checkBlogRoute();
-
-  // Listen for hash changes (for blog navigation)
-  window.addEventListener('hashchange', checkBlogRoute);
+  
+  // Hash handling for navigation
+  handleHashNavigation();
+  window.addEventListener('hashchange', handleHashNavigation);
 }
 
 // ===================================
-// Navigation Functions
+// Core Functions
 // ===================================
-function scrollToSection(sectionId) {
-  const element = document.getElementById(sectionId);
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth' });
-    closeMobileMenu();
-    setActiveSection(sectionId);
 
-    // Keep the active state for a brief moment
-    setTimeout(() => {
-      setActiveSection('');
-    }, 1000);
-  }
-}
-
-function setActiveSection(sectionId) {
-  activeSection = sectionId;
-
-  // Update nav link styles
-  document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
-    const section = link.getAttribute('data-section');
-    if (section === sectionId) {
-      link.classList.add('active');
-    } else {
-      link.classList.remove('active');
-    }
-  });
-}
-
-function toggleMobileMenu() {
-  isMenuOpen = !isMenuOpen;
-  const mobileNav = document.getElementById('mobile-nav');
-  const menuIcon = document.getElementById('menu-icon');
-  const closeIcon = document.getElementById('close-icon');
-
-  if (isMenuOpen) {
-    mobileNav.classList.add('show');
-    mobileNav.classList.remove('hidden');
-    menuIcon.classList.add('hidden');
-    closeIcon.classList.remove('hidden');
-  } else {
-    mobileNav.classList.remove('show');
-    mobileNav.classList.add('hidden');
-    menuIcon.classList.remove('hidden');
-    closeIcon.classList.add('hidden');
-  }
-}
-
-function closeMobileMenu() {
-  isMenuOpen = false;
-  const mobileNav = document.getElementById('mobile-nav');
-  const menuIcon = document.getElementById('menu-icon');
-  const closeIcon = document.getElementById('close-icon');
-
-  mobileNav.classList.remove('show');
-  mobileNav.classList.add('hidden');
-  menuIcon.classList.remove('hidden');
-  closeIcon.classList.add('hidden');
-}
-
-// ===================================
-// Hero Section - IP Fetch
-// ===================================
 async function fetchUserIP() {
   try {
     const response = await fetch('https://api.ipify.org?format=json');
     const data = await response.json();
-    document.getElementById('user-ip').textContent = data.ip;
-  } catch (error) {
-    console.log('Could not fetch IP:', error);
-    // Keep default IP if fetch fails
+    const el = document.getElementById('user-ip');
+    if (el) el.textContent = data.ip;
+  } catch (e) {
+    console.log('IP fetch failed');
   }
 }
 
-// ===================================
-// Hero Section - Typewriter Animation
-// ===================================
-function startTypewriterAnimation() {
-  const targetText = "I'm Azan Waseem";
-  const thirdLineText = "& I love to build stuff";
+function startTypewriter() {
+  const roles = [
+    "I'm Azan Waseem",
+    "I Build Communities",
+    "I Love Low-Level Code",
+    "I Help Students Grow"
+  ];
+  
+  const el = document.getElementById('typewriter-text');
+  if (!el) return;
+  
+  let roleIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let typeSpeed = 100;
 
-  let currentIndex = 0;
-  const typewriterElement = document.getElementById('typewriter-text');
-  const cursor1 = document.getElementById('cursor1');
-  const thirdLineElement = document.getElementById('third-line-text');
-  const cursor2 = document.getElementById('cursor2');
-
-  // First line animation
-  const typingInterval = setInterval(() => {
-    if (currentIndex <= targetText.length) {
-      typewriterElement.textContent = targetText.slice(0, currentIndex);
-      currentIndex++;
+  function type() {
+    const currentRole = roles[roleIndex];
+    
+    if (isDeleting) {
+      el.textContent = currentRole.substring(0, charIndex - 1);
+      charIndex--;
+      typeSpeed = 50;
     } else {
-      clearInterval(typingInterval);
-      cursor1.classList.add('hidden');
-
-      // Start third line animation after a brief pause
-      setTimeout(() => {
-        cursor2.classList.remove('hidden');
-        startThirdLineAnimation(thirdLineText, thirdLineElement, cursor2);
-      }, 500);
+      el.textContent = currentRole.substring(0, charIndex + 1);
+      charIndex++;
+      typeSpeed = 100;
     }
-  }, 100 + Math.random() * 100);
-}
 
-function startThirdLineAnimation(text, element, cursor) {
-  let currentIndex = 0;
-
-  const thirdLineInterval = setInterval(() => {
-    if (currentIndex <= text.length) {
-      const displayText = text.slice(0, currentIndex);
-      element.innerHTML = renderThirdLineText(displayText);
-      currentIndex++;
-    } else {
-      clearInterval(thirdLineInterval);
-      // Hide cursor after animation completes
-      setTimeout(() => {
-        cursor.classList.add('hidden');
-      }, 2000);
+    if (!isDeleting && charIndex === currentRole.length) {
+      isDeleting = true;
+      typeSpeed = 2000; // Pause at end
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      roleIndex = (roleIndex + 1) % roles.length;
+      typeSpeed = 500; // Pause before new word
     }
-  }, 80 + Math.random() * 80);
+
+    setTimeout(type, typeSpeed);
+  }
+
+  setTimeout(type, 500);
 }
 
-function renderThirdLineText(text) {
-  // Color the & character red
-  return text.split('').map(char => {
-    if (char === '&') {
-      return `<span class="text-accent">${char}</span>`;
-    }
-    return `<span class="text-light">${char}</span>`;
-  }).join('');
+function startUptimeCounter() {
+  const el = document.getElementById('uptime');
+  if (!el) return;
+  
+  const start = new Date();
+  
+  setInterval(() => {
+    const now = new Date();
+    const diff = Math.floor((now - start) / 1000);
+    
+    const h = Math.floor(diff / 3600).toString().padStart(2, '0');
+    const m = Math.floor((diff % 3600) / 60).toString().padStart(2, '0');
+    const s = (diff % 60).toString().padStart(2, '0');
+    
+    el.textContent = `${h}:${m}:${s}`;
+  }, 1000);
 }
 
-// ===================================
-// Scroll Animations
-// ===================================
-function initScrollAnimations() {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-        }
-      });
-    },
-    { threshold: 0.1, rootMargin: '-50px' }
-  );
-
-  document.querySelectorAll('.scroll-animate').forEach(element => {
-    observer.observe(element);
-  });
-}
-
-// ===================================
-// Blog Functions
-// ===================================
 function renderBlogPosts() {
-  const blogList = document.getElementById('blog-list');
-  if (!blogList) return;
-
-  blogList.innerHTML = blogPosts.map(post => `
-    <article class="blog-card" onclick="openBlogPost('${post.slug}')">
-      <div class="terminal-command">
-        <span class="text-accent">$</span>
-        <span class="text-light ml-2">cat ${post.slug}.md</span>
-      </div>
-
-      <div class="terminal-content blog-content">
-        <h3 class="blog-post-title">${post.title}</h3>
-        <p class="blog-excerpt">${post.excerpt}</p>
-        <p class="blog-date">${formatDate(post.date)}</p>
-      </div>
-    </article>
+  const list = document.getElementById('blog-list');
+  if (!list) return;
+  
+  // Sort by date desc
+  const sorted = [...blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
+  
+  list.innerHTML = sorted.map(post => `
+    <a href="blog.html?slug=${post.slug}" class="blog-row">
+      <div class="blog-date">${formatDate(post.date)}</div>
+      <div class="blog-title">${post.title}</div>
+    </a>
   `).join('');
 }
 
-function formatDate(dateString) {
-  const date = new Date(dateString);
-  return date.toLocaleDateString();
+function formatDate(dateStr) {
+  // Return YYYY-MM-DD for that nerdy feel
+  const d = new Date(dateStr);
+  return d.toISOString().split('T')[0];
 }
 
-function formatDateLong(dateString) {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
-}
-
-function openBlogPost(slug) {
-  window.location.href = `blog.html?slug=${slug}`;
-}
-
-function checkBlogRoute() {
-  // This function handles hash-based navigation if needed
+function handleHashNavigation() {
   const hash = window.location.hash;
-  if (hash === '#blog') {
-    setTimeout(() => {
-      const blogSection = document.getElementById('blog');
-      if (blogSection) {
-        blogSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 100);
+  if (hash) {
+    const el = document.querySelector(hash);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 }
 
-// ===================================
-// Utility Functions
-// ===================================
-function parseMarkdown(markdown) {
-  // Simple markdown parser
-  let html = markdown;
-
-  // Headers
-  html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
-  html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
-  html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
-
-  // Bold
-  html = html.replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>');
-
-  // Italic
-  html = html.replace(/\*(.*?)\*/gim, '<em>$1</em>');
-
-  // Links
-  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
-
-  // Blockquotes
-  html = html.replace(/^> (.*$)/gim, '<blockquote><p>$1</p></blockquote>');
-
-  // Inline code
-  html = html.replace(/`([^`]+)`/gim, '<code>$1</code>');
-
-  // Unordered lists
-  html = html.replace(/^\- (.*$)/gim, '<li>$1</li>');
-
-  // Ordered lists
-  html = html.replace(/^\d+\. (.*$)/gim, '<li>$1</li>');
-
-  // Paragraphs - split by double newlines
-  const paragraphs = html.split(/\n\n+/);
-  html = paragraphs.map(p => {
-    p = p.trim();
-    if (!p) return '';
-    // Don't wrap if already a block element
-    if (p.startsWith('<h') || p.startsWith('<blockquote') || p.startsWith('<li') || p.startsWith('<ul') || p.startsWith('<ol') || p.startsWith('<pre')) {
-      return p;
-    }
-    // Handle list items - wrap in ul
-    if (p.includes('<li>')) {
-      return '<ul>' + p + '</ul>';
-    }
-    return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
-  }).join('\n');
-
-  return html;
+function toggleMobileMenu() {
+  const nav = document.getElementById('mobile-nav');
+  if (nav) {
+    nav.classList.toggle('open');
+  }
 }
 
-// Make functions globally available
-window.scrollToSection = scrollToSection;
+// Make globally available
 window.toggleMobileMenu = toggleMobileMenu;
-window.openBlogPost = openBlogPost;
-window.blogPosts = blogPosts;
-window.parseMarkdown = parseMarkdown;
-window.formatDateLong = formatDateLong;
+window.blogPosts = blogPosts; // Export for blog.html
+window.formatDate = formatDate; // Export for blog.js potentially
