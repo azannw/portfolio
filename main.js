@@ -26,7 +26,7 @@ When you have tech skills alongside your medical knowledge, you suddenly have mu
 
 Pakistan's healthcare tech industry is booming, and there are numerous ongoing projects actively looking for medical professionals who understand technology.
 
-Companies like Sehat Kahani are revolutionizing telemedicine in Pakistan, connecting rural patients with urban doctors through technology. Marham has created one of the largest doctor-patient platforms in the country. Oladoc is transforming how people book medical appointments. These aren't just foreign concepts - these are Pakistani companies, built by Pakistanis, solving Pakistani problems.
+Companies like Sehat Kahani are revolutionizing telemedicine in Pakistan, connecting rural patients with urban doctors through technology. Marham has created one of the largest doctor-patient platforms in the country. Oladoc is transforming how people book medical appointments. These aren't just foreign concepts, these are Pakistani companies, built by Pakistanis, solving Pakistani problems.
 
 The Pakistan Software Houses Association (P@SHA) reports that the country's IT exports have crossed $2.6 billion, with healthcare technology being one of the fastest-growing sectors. This growth means opportunities, funding, and most importantly, jobs for people who understand both medicine and technology.
 
@@ -72,7 +72,7 @@ Pick one area that genuinely interests you:
 
 Use [roadmap.sh](https://roadmap.sh/) for detailed learning paths. For AI/ML, follow the [AI and Data Scientist Roadmap](https://roadmap.sh/ai-data-scientist). For web development, follow the [Frontend](https://roadmap.sh/frontend) and [Backend](https://roadmap.sh/backend) roadmaps. For mobile development, check the [Android](https://roadmap.sh/android) and [iOS](https://roadmap.sh/ios) roadmaps.
 
-Dedicate at least 2 hours daily to focused learning. Consistency is key - it's better to study 2 hours every day than to cram for 10 hours once a week.
+Dedicate at least 2 hours daily to focused learning. Consistency is key, it's better to study 2 hours every day than to cram for 10 hours once a week.
 
 ### Phase 4: Build Real Projects (2-3 months)
 
@@ -98,13 +98,13 @@ Also join healthcare IT professionals on LinkedIn, attend local tech meetups in 
 
 ## Common Concerns Addressed
 
-"I don't have time" - You need consistent 1-2 hours daily, not 8 hours. Many successful healthcare tech professionals started while in medical school.
+"I don't have time", You need consistent 1-2 hours daily, not 8 hours. Many successful healthcare tech professionals started while in medical school.
 
-"I'm not good at math" - Most practical applications don't require advanced mathematics. The math from FSc is sufficient to get started.
+"I'm not good at math", Most practical applications don't require advanced mathematics. The math from FSc is sufficient to get started.
 
-"What if I learn the wrong thing" - Start with fundamentals and pick one domain. You can always pivot later, and foundational skills transfer between domains.
+"What if I learn the wrong thing", Start with fundamentals and pick one domain. You can always pivot later, and foundational skills transfer between domains.
 
-The healthcare industry is transforming rapidly, and there's room for medical professionals who understand both medicine and technology. Your medical background isn't a limitation - it's your superpower in the tech world. The combination of clinical knowledge and technical skills is rare and valuable.
+The healthcare industry is transforming rapidly, and there's room for medical professionals who understand both medicine and technology. Your medical background isn't a limitation, it's your superpower in the tech world. The combination of clinical knowledge and technical skills is rare and valuable.
 
 Join our [MedTech community](https://chat.whatsapp.com/BTtOPTQArHZCQE54csLQhF), start learning today, and discover opportunities that most of your classmates don't even know exist.`
   },
@@ -252,15 +252,19 @@ function initializeApp() {
 // Core Functions
 // ===================================
 
-async function fetchUserIP() {
-  try {
-    const response = await fetch('https://api.ipify.org?format=json');
-    const data = await response.json();
-    const el = document.getElementById('user-ip');
-    if (el) el.textContent = data.ip;
-  } catch (e) {
-    console.log('IP fetch failed');
-  }
+function fetchUserIP() {
+  const el = document.getElementById('user-ip');
+  if (!el) return;
+
+  fetch('https://api.ipify.org?format=json')
+    .then(response => response.json())
+    .then(data => {
+      el.textContent = data.ip;
+    })
+    .catch(e => {
+      console.log('IP fetch failed');
+      el.textContent = 'there'; // Fallback
+    });
 }
 
 function startTypewriter() {

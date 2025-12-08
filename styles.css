@@ -427,6 +427,16 @@ section {
   border: 1px solid var(--border-color);
   padding: 1.5rem;
   text-align: left;
+  transition: var(--transition-fast);
+}
+
+.stat-box:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.stat-box:hover .stat-label {
+  color: var(--accent-color);
 }
 
 .stat-number {
@@ -590,9 +600,19 @@ footer {
   
   /* Blog Post Mobile Fixes */
   .blog-post-wrapper {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     padding-bottom: 2rem;
+    padding-top: 80px; /* Reduced from 100px for mobile */
+  }
+
+  .post-content h1 {
+    font-size: 1.75rem; /* Smaller title on mobile */
+  }
+
+  .post-content pre {
+    padding: 1rem; /* Smaller padding on code blocks */
+    font-size: 0.85rem;
   }
 }
 
@@ -603,7 +623,9 @@ footer {
   padding-top: 100px;
   max-width: 700px;
   margin: 0 auto;
-  min-height: calc(100vh - 100px); /* Ensure full height */
+  min-height: calc(100vh - 80px); /* Adjusted to ensure footer sits well */
+  padding-left: 1.5rem; /* Ensure consistent padding on desktop too */
+  padding-right: 1.5rem;
 }
 
 .back-link {
