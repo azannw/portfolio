@@ -1,12 +1,16 @@
 {
-  "buildCommand": null,
-  "devCommand": null,
-  "installCommand": null,
-  "framework": null,
+  "cleanUrls": true,
+  "trailingSlash": false,
   "rewrites": [
     {
       "source": "/blog/:slug",
       "destination": "/blog.html?slug=:slug"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/favicon.ico",
+      "dest": "/public/favicon1.png"
     }
   ],
   "headers": [
