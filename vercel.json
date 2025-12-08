@@ -1,36 +1,17 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false,
   "rewrites": [
     {
       "source": "/blog/:slug",
-      "destination": "/blog.html?slug=:slug"
+      "destination": "/blog.html"
     }
   ],
-  "routes": [
+  "redirects": [
     {
-      "src": "/favicon.ico",
-      "dest": "/public/favicon1.png"
+      "source": "/favicon.ico",
+      "destination": "/public/favicon1.png",
+      "permanent": false
     }
   ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
-        }
-      ]
-    },
-    {
-      "source": "/public/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    }
-  ]
+  "cleanUrls": true,
+  "trailingSlash": false
 }
