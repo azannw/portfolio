@@ -614,6 +614,17 @@ footer {
     padding: 1rem; /* Smaller padding on code blocks */
     font-size: 0.85rem;
   }
+
+  /* Share links mobile fix */
+  .share-links {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Mentorship page mobile fix */
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ===================================
@@ -687,4 +698,12 @@ footer {
   border: none;
   padding: 0;
   color: var(--text-primary);
+}
+
+/* Share Links */
+.share-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.9rem;
 }
