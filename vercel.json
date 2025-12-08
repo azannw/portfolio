@@ -1,4 +1,8 @@
 {
+  "buildCommand": null,
+  "devCommand": null,
+  "installCommand": null,
+  "framework": null,
   "rewrites": [
     {
       "source": "/blog/:slug",
