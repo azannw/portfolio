@@ -1,70 +1,7 @@
-export interface BlogPost {
-  id: string
-  title: string
-  date: string
-  content: string
-  excerpt: string
-  slug: string
-}
-
-// Function to parse frontmatter from markdown content
-function parseFrontmatter(content: string) {
-  const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/
-  const match = content.match(frontmatterRegex)
-  
-  if (!match) {
-    return {
-      frontmatter: {},
-      content: content
-    }
-  }
-  
-  const frontmatterText = match[1]
-  const markdownContent = match[2]
-  
-  const frontmatter: Record<string, string> = {}
-  frontmatterText.split('\n').forEach(line => {
-    const [key, ...valueParts] = line.split(':')
-    if (key && valueParts.length > 0) {
-      frontmatter[key.trim()] = valueParts.join(':').trim().replace(/^["']|["']$/g, '')
-    }
-  })
-  
-  return {
-    frontmatter,
-    content: markdownContent
-  }
-}
-
-// Function to generate excerpt from content
-function generateExcerpt(content: string, maxLength: number = 150): string {
-  // Remove markdown syntax for excerpt
-  const plainText = content
-    .replace(/#{1,6}\s+/g, '') // Remove headers
-    .replace(/\*\*(.*?)\*\*/g, '$1') // Remove bold
-    .replace(/\*(.*?)\*/g, '$1') // Remove italic
-    .replace(/`(.*?)`/g, '$1') // Remove inline code
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Remove links
-    .replace(/```[\s\S]*?```/g, '') // Remove code blocks
-    .trim()
-  
-  if (plainText.length <= maxLength) {
-    return plainText
-  }
-  
-  return plainText.substring(0, maxLength).trim() + '...'
-}
-
-// Function to create slug from title
-function createSlug(title: string): string {
-  return title
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-}
-
-// Sample blog posts (these will be replaced when you add .md files)
-export const samplePosts: BlogPost[] = [
+// ===================================
+// Blog Posts Data
+// ===================================
+const blogPosts = [
   {
     id: '3',
     title: 'Why and How to Learn Tech as a Medical Student',
@@ -185,13 +122,13 @@ Before I actually stepped into the world of computer science, I went deep into r
 
 ## The Foundation
 
-FAST was the first university in Pakistan to introduce computer science as a proper degree. It all began back in the early 80s with a small setup in Karachi. At that time it was affiliated with Karachi University and had only a handful of students, but the vision was clear even then. This wasn't someone's personal venture or a business setup. 
+FAST was the first university in Pakistan to introduce computer science as a proper degree. It all began back in the early 80s with a small setup in Karachi. At that time it was affiliated with Karachi University and had only a handful of students, but the vision was clear even then. This wasn't someone's personal venture or a business setup.
 
 FAST was started as a foundation university by **Agha Hasan Abedi**, a man whose name not many people know today, but whose contribution to education in Pakistan is beyond incredible. With just some donation money and a vision to bring advanced science and technology to the country, he laid the roots of what would become one of the top tech institutions in Pakistan. From that small beginning, FAST now has campuses in six major cities and continues to grow stronger every year.
 
 ## The Ragra Culture
 
-FAST is known for producing some of the most skilled and hardworking computer science graduates in the country. But it's not just luck. The secret behind this is something every FAST student knows too well. It's the **ragra**. Yes, the grind, the struggle, the non-stop pressure that defines student life here. 
+FAST is known for producing some of the most skilled and hardworking computer science graduates in the country. But it's not just luck. The secret behind this is something every FAST student knows too well. It's the **ragra**. Yes, the grind, the struggle, the non-stop pressure that defines student life here.
 
 Maybe I'll write a full blog on what ragra really means, but for now just know that FAST doesn't let you relax. The exams are difficult, the grading is strict, and the deadlines never end. But this is exactly what builds resilience and real-world skills.
 
@@ -247,7 +184,7 @@ It feels unfair. You start comparing yourself with students who have been doing 
 
 ## How to Study Smart
 
-The best approach is not to study just for the sake of passing. **Learn the concepts deeply.** Every topic, every example, and every exercise from your textbook matters. These same concepts will return in your first-year university courses like Calculus, Digital Logic Design, and Programming. 
+The best approach is not to study just for the sake of passing. **Learn the concepts deeply.** Every topic, every example, and every exercise from your textbook matters. These same concepts will return in your first-year university courses like Calculus, Digital Logic Design, and Programming.
 
 Some exercises are more important than others. I remember one teacher casually saying:
 
@@ -291,43 +228,300 @@ In the end, remember this. Just because you did not study maths in college does 
 
 The road is not easy, but it is clear. Stay consistent. Practice with purpose. Use the right resources. Believe that you can catch up. And once you do, you will not just pass the test. You will walk into FAST with confidence, knowing you earned your seat in one of the top CS programs in Pakistan.`
   }
-]
+];
 
-// Function to load blog posts (this will be enhanced when you add .md files)
-export async function loadBlogPosts(): Promise<BlogPost[]> {
-  // For now, return sample posts
-  // Later, this will dynamically load from .md files
-  return samplePosts
+// ===================================
+// State Variables
+// ===================================
+let activeSection = '';
+let isMenuOpen = false;
+
+// ===================================
+// DOM Ready
+// ===================================
+document.addEventListener('DOMContentLoaded', function() {
+  initializeApp();
+});
+
+function initializeApp() {
+  // Initialize all features
+  fetchUserIP();
+  startTypewriterAnimation();
+  initScrollAnimations();
+  renderBlogPosts();
+
+  // Check if we're on a blog post page via hash
+  checkBlogRoute();
+
+  // Listen for hash changes (for blog navigation)
+  window.addEventListener('hashchange', checkBlogRoute);
 }
 
-// Function to get a single blog post by slug
-export async function getBlogPost(slug: string): Promise<BlogPost | null> {
-  const posts = await loadBlogPosts()
-  return posts.find(post => post.slug === slug) || null
-}
+// ===================================
+// Navigation Functions
+// ===================================
+function scrollToSection(sectionId) {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+    closeMobileMenu();
+    setActiveSection(sectionId);
 
-// Function to process markdown file content into BlogPost
-export function processMarkdownFile(filename: string, content: string): BlogPost {
-  const { frontmatter, content: markdownContent } = parseFrontmatter(content)
-  
-  const title = frontmatter.title || filename.replace('.md', '').replace(/-/g, ' ')
-  const date = frontmatter.date || new Date().toISOString().split('T')[0]
-  const excerpt = frontmatter.excerpt || generateExcerpt(markdownContent)
-  const slug = frontmatter.slug || createSlug(title)
-  const id = slug
-  
-  return {
-    id,
-    title,
-    date,
-    excerpt,
-    slug,
-    content: `---
-title: ${title}
-date: ${date}
-excerpt: ${excerpt}
----
-
-${markdownContent}`
+    // Keep the active state for a brief moment
+    setTimeout(() => {
+      setActiveSection('');
+    }, 1000);
   }
-} 
+}
+
+function setActiveSection(sectionId) {
+  activeSection = sectionId;
+
+  // Update nav link styles
+  document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
+    const section = link.getAttribute('data-section');
+    if (section === sectionId) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+}
+
+function toggleMobileMenu() {
+  isMenuOpen = !isMenuOpen;
+  const mobileNav = document.getElementById('mobile-nav');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  if (isMenuOpen) {
+    mobileNav.classList.add('show');
+    mobileNav.classList.remove('hidden');
+    menuIcon.classList.add('hidden');
+    closeIcon.classList.remove('hidden');
+  } else {
+    mobileNav.classList.remove('show');
+    mobileNav.classList.add('hidden');
+    menuIcon.classList.remove('hidden');
+    closeIcon.classList.add('hidden');
+  }
+}
+
+function closeMobileMenu() {
+  isMenuOpen = false;
+  const mobileNav = document.getElementById('mobile-nav');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  mobileNav.classList.remove('show');
+  mobileNav.classList.add('hidden');
+  menuIcon.classList.remove('hidden');
+  closeIcon.classList.add('hidden');
+}
+
+// ===================================
+// Hero Section - IP Fetch
+// ===================================
+async function fetchUserIP() {
+  try {
+    const response = await fetch('https://api.ipify.org?format=json');
+    const data = await response.json();
+    document.getElementById('user-ip').textContent = data.ip;
+  } catch (error) {
+    console.log('Could not fetch IP:', error);
+    // Keep default IP if fetch fails
+  }
+}
+
+// ===================================
+// Hero Section - Typewriter Animation
+// ===================================
+function startTypewriterAnimation() {
+  const targetText = "I'm Azan Waseem";
+  const thirdLineText = "& I love to build stuff";
+
+  let currentIndex = 0;
+  const typewriterElement = document.getElementById('typewriter-text');
+  const cursor1 = document.getElementById('cursor1');
+  const thirdLineElement = document.getElementById('third-line-text');
+  const cursor2 = document.getElementById('cursor2');
+
+  // First line animation
+  const typingInterval = setInterval(() => {
+    if (currentIndex <= targetText.length) {
+      typewriterElement.textContent = targetText.slice(0, currentIndex);
+      currentIndex++;
+    } else {
+      clearInterval(typingInterval);
+      cursor1.classList.add('hidden');
+
+      // Start third line animation after a brief pause
+      setTimeout(() => {
+        cursor2.classList.remove('hidden');
+        startThirdLineAnimation(thirdLineText, thirdLineElement, cursor2);
+      }, 500);
+    }
+  }, 100 + Math.random() * 100);
+}
+
+function startThirdLineAnimation(text, element, cursor) {
+  let currentIndex = 0;
+
+  const thirdLineInterval = setInterval(() => {
+    if (currentIndex <= text.length) {
+      const displayText = text.slice(0, currentIndex);
+      element.innerHTML = renderThirdLineText(displayText);
+      currentIndex++;
+    } else {
+      clearInterval(thirdLineInterval);
+      // Hide cursor after animation completes
+      setTimeout(() => {
+        cursor.classList.add('hidden');
+      }, 2000);
+    }
+  }, 80 + Math.random() * 80);
+}
+
+function renderThirdLineText(text) {
+  // Color the & character red
+  return text.split('').map(char => {
+    if (char === '&') {
+      return `<span class="text-accent">${char}</span>`;
+    }
+    return `<span class="text-light">${char}</span>`;
+  }).join('');
+}
+
+// ===================================
+// Scroll Animations
+// ===================================
+function initScrollAnimations() {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '-50px' }
+  );
+
+  document.querySelectorAll('.scroll-animate').forEach(element => {
+    observer.observe(element);
+  });
+}
+
+// ===================================
+// Blog Functions
+// ===================================
+function renderBlogPosts() {
+  const blogList = document.getElementById('blog-list');
+  if (!blogList) return;
+
+  blogList.innerHTML = blogPosts.map(post => `
+    <article class="blog-card" onclick="openBlogPost('${post.slug}')">
+      <div class="terminal-command">
+        <span class="text-accent">$</span>
+        <span class="text-light ml-2">cat ${post.slug}.md</span>
+      </div>
+
+      <div class="terminal-content blog-content">
+        <h3 class="blog-post-title">${post.title}</h3>
+        <p class="blog-excerpt">${post.excerpt}</p>
+        <p class="blog-date">${formatDate(post.date)}</p>
+      </div>
+    </article>
+  `).join('');
+}
+
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString();
+}
+
+function formatDateLong(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+
+function openBlogPost(slug) {
+  window.location.href = `blog.html?slug=${slug}`;
+}
+
+function checkBlogRoute() {
+  // This function handles hash-based navigation if needed
+  const hash = window.location.hash;
+  if (hash === '#blog') {
+    setTimeout(() => {
+      const blogSection = document.getElementById('blog');
+      if (blogSection) {
+        blogSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  }
+}
+
+// ===================================
+// Utility Functions
+// ===================================
+function parseMarkdown(markdown) {
+  // Simple markdown parser
+  let html = markdown;
+
+  // Headers
+  html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+  html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+  html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+
+  // Bold
+  html = html.replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>');
+
+  // Italic
+  html = html.replace(/\*(.*?)\*/gim, '<em>$1</em>');
+
+  // Links
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+
+  // Blockquotes
+  html = html.replace(/^> (.*$)/gim, '<blockquote><p>$1</p></blockquote>');
+
+  // Inline code
+  html = html.replace(/`([^`]+)`/gim, '<code>$1</code>');
+
+  // Unordered lists
+  html = html.replace(/^\- (.*$)/gim, '<li>$1</li>');
+
+  // Ordered lists
+  html = html.replace(/^\d+\. (.*$)/gim, '<li>$1</li>');
+
+  // Paragraphs - split by double newlines
+  const paragraphs = html.split(/\n\n+/);
+  html = paragraphs.map(p => {
+    p = p.trim();
+    if (!p) return '';
+    // Don't wrap if already a block element
+    if (p.startsWith('<h') || p.startsWith('<blockquote') || p.startsWith('<li') || p.startsWith('<ul') || p.startsWith('<ol') || p.startsWith('<pre')) {
+      return p;
+    }
+    // Handle list items - wrap in ul
+    if (p.includes('<li>')) {
+      return '<ul>' + p + '</ul>';
+    }
+    return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+  }).join('\n');
+
+  return html;
+}
+
+// Make functions globally available
+window.scrollToSection = scrollToSection;
+window.toggleMobileMenu = toggleMobileMenu;
+window.openBlogPost = openBlogPost;
+window.blogPosts = blogPosts;
+window.parseMarkdown = parseMarkdown;
+window.formatDateLong = formatDateLong;
