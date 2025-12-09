@@ -457,6 +457,9 @@ The road is not easy, but it is clear. Stay consistent. Practice with purpose. U
   }
 ];
 
+// Export blog posts immediately for blog.html
+window.blogPosts = blogPosts;
+
 // ===================================
 // App Initialization
 // ===================================
@@ -596,5 +599,4 @@ function toggleMobileMenu() {
 
 // Make globally available
 window.toggleMobileMenu = toggleMobileMenu;
-window.blogPosts = blogPosts; // Export for blog.html
 window.formatDate = formatDate; // Export for blog.js potentially
