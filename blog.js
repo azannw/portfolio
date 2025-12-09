@@ -7,8 +7,17 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function loadBlogPost() {
+  // Support both /blog?slug=xxx and /blog/xxx URL formats
   const urlParams = new URLSearchParams(window.location.search);
-  const slug = urlParams.get('slug');
+  let slug = urlParams.get('slug');
+  
+  // If no query param, try to get slug from path
+  if (!slug) {
+    const pathMatch = window.location.pathname.match(/\/blog\/(.+)/);
+    if (pathMatch) {
+      slug = pathMatch[1];
+    }
+  }
 
   if (!slug) {
     showNotFound();

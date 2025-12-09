@@ -565,7 +565,7 @@ function renderBlogPosts() {
   const sorted = [...blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
   
   list.innerHTML = sorted.map(post => `
-    <a href="/blog?slug=${post.slug}" class="blog-row">
+    <a href="/blog/${post.slug}" class="blog-row">
       <div class="blog-date">${formatDate(post.date)}</div>
       <div class="blog-title">${post.title}</div>
     </a>

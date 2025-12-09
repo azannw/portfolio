@@ -8,14 +8,7 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/blog",
-      "has": [
-        {
-          "type": "query",
-          "key": "slug",
-          "value": "(?<slug>.*)"
-        }
-      ],
+      "source": "/blog/:slug",
       "destination": "/api/blog?slug=:slug"
     }
   ]
