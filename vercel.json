@@ -9,12 +9,6 @@
   "rewrites": [
     {
       "source": "/blog",
-      "has": [
-        {
-          "type": "query",
-          "key": "slug"
-        }
-      ],
       "destination": "/api/blog"
     }
   ]

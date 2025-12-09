@@ -22,9 +22,15 @@ export default async function handler(request) {
   const url = new URL(request.url);
   const slug = url.searchParams.get('slug');
   
-  // Fetch the original blog.html directly
+  // If no slug provided, redirect to homepage blog section
+  if (!slug) {
+    return Response.redirect(`${url.origin}/#blog`, 302);
+  }
+  
+  // Fetch the original blog.html directly  
   const baseUrl = url.origin;
-  const blogHtmlResponse = await fetch(`${baseUrl}/blog.html`, {
+  const blogHtmlUrl = `${baseUrl}/blog.html?slug=${slug}`;
+  const blogHtmlResponse = await fetch(blogHtmlUrl, {
     headers: {
       'Accept': 'text/html',
     },
