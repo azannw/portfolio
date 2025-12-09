@@ -9,9 +9,7 @@ const blogPosts = [
     slug: 'sfml-3-setup-visual-studio-insiders-windows',
     excerpt: 'A step-by-step setup that actually works for SFML 3 with Visual Studio Community Insiders on Windows.',
     image: 'https://azanw.com/sfml-vs-preview.png',
-    content: `# Complete Guide to Setting up SFML 3 in Visual Studio Community Insiders on Windows
-
-If you search online for SFML setup guides you will notice most of them are old or written for SFML 2 and older Visual Studio versions. When I was setting up SFML 3 with Visual Studio Community Insiders, half of the tutorials did not work. This is the exact step by step setup that worked for me on Windows and should work for you too.
+    content: `If you search online for SFML setup guides you will notice most of them are old or written for SFML 2 and older Visual Studio versions. When I was setting up SFML 3 with Visual Studio Community Insiders, half of the tutorials did not work. This is the exact step by step setup that worked for me on Windows and should work for you too.
 
 This guide assumes you already installed Visual Studio Community Insiders with the Desktop Development with C++ workload. You do not need VS Code here.
 
