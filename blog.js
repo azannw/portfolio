@@ -73,6 +73,13 @@ function updateMetaTags(post) {
   setMeta('og-description', post.excerpt);
   setMeta('twitter-title', post.title);
   setMeta('twitter-description', post.excerpt);
+  const image = post.image || 'https://azanw.com/link-preview.png';
+  
+  // Image tags
+  const ogImage = document.querySelector('meta[property="og:image"]');
+  if (ogImage) ogImage.setAttribute('content', image);
+  const twImage = document.querySelector('meta[property="twitter:image"]');
+  if (twImage) twImage.setAttribute('content', image);
   
   // URL updates
   const url = window.location.href;
