@@ -27,12 +27,12 @@ export default async function handler(request) {
     return Response.redirect(`${url.origin}/#blog`, 302);
   }
   
-  // Fetch the original blog.html directly  
+  // Fetch the original blog.html directly (without query params to avoid redirect loops)
   const baseUrl = url.origin;
-  const blogHtmlUrl = `${baseUrl}/blog.html?slug=${slug}`;
-  const blogHtmlResponse = await fetch(blogHtmlUrl, {
+  const blogHtmlResponse = await fetch(`${baseUrl}/blog.html`, {
     headers: {
       'Accept': 'text/html',
+      'x-skip-rewrite': 'true',
     },
   });
   
