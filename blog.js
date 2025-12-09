@@ -38,9 +38,12 @@ function loadBlogPost() {
   // Update Share Links
   updateShareButtons(post);
 
-  // Show
+  // Hide loading and 404, show article
   const loading = document.getElementById('loading');
   if (loading) loading.style.display = 'none';
+  
+  const notFound = document.getElementById('not-found');
+  if (notFound) notFound.style.display = 'none';
   
   const article = document.getElementById('post-article');
   if (article) article.style.display = 'block';

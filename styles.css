@@ -632,8 +632,9 @@ footer {
   /* Share section mobile fix */
   .share-section {
     margin-top: 3rem;
-    padding-top: 2rem;
-    padding-bottom: 2.5rem;
+    margin-bottom: 3rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1rem;
   }
 
   .share-links {
@@ -642,9 +643,35 @@ footer {
     gap: 0.75rem;
   }
 
+  /* Better code block handling on mobile */
+  .post-content pre,
+  .post-content code {
+    max-width: 100%;
+    overflow-x: auto;
+    word-break: break-word;
+  }
+
   /* Mentorship page mobile fix */
   .about-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Tablet breakpoint */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .share-section {
+    margin-top: 3.5rem;
+    margin-bottom: 5rem;
+    padding-top: 2rem;
+  }
+
+  .blog-post-wrapper {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .post-content pre {
+    font-size: 0.85rem;
   }
 }
 
@@ -733,9 +760,9 @@ footer {
 /* Share Section */
 .share-section {
   margin-top: 4rem;
-  margin-bottom: 4rem;
+  margin-bottom: 6rem;
   padding-top: 2.5rem;
-  padding-bottom: 3rem;
+  padding-bottom: 2rem;
   border-top: 1px solid var(--border-color);
 }
 
@@ -751,4 +778,5 @@ footer {
   gap: 1rem;
   font-size: 0.9rem;
 }
+
 
