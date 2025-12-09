@@ -5,11 +5,5 @@
   "installCommand": "",
   "outputDirectory": ".",
   "cleanUrls": true,
-  "trailingSlash": false,
-  "rewrites": [
-    {
-      "source": "/blog/:slug",
-      "destination": "/api/blog?slug=:slug"
-    }
-  ]
+  "trailingSlash": false
 }

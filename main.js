@@ -470,7 +470,7 @@ function initializeApp() {
   startTypewriter();
   startUptimeCounter();
   renderBlogPosts();
-  
+
   // Hash handling for navigation
   handleHashNavigation();
   window.addEventListener('hashchange', handleHashNavigation);
@@ -522,7 +522,7 @@ function startTypewriter() {
       el.textContent = currentRole.substring(0, charIndex + 1);
       charIndex++;
       typeSpeed = 100;
-    }
+}
 
     if (!isDeleting && charIndex === currentRole.length) {
       isDeleting = true;
@@ -534,7 +534,7 @@ function startTypewriter() {
     }
 
     setTimeout(type, typeSpeed);
-  }
+    }
 
   setTimeout(type, 500);
 }
@@ -560,12 +560,12 @@ function startUptimeCounter() {
 function renderBlogPosts() {
   const list = document.getElementById('blog-list');
   if (!list) return;
-  
+
   // Sort by date desc
   const sorted = [...blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
   
   list.innerHTML = sorted.map(post => `
-    <a href="/blog/${post.slug}" class="blog-row">
+    <a href="/blog?slug=${post.slug}" class="blog-row">
       <div class="blog-date">${formatDate(post.date)}</div>
       <div class="blog-title">${post.title}</div>
     </a>
@@ -584,7 +584,7 @@ function handleHashNavigation() {
     const el = document.querySelector(hash);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
-    }
+      }
   }
 }
 
