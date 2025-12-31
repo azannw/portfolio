@@ -2,11 +2,20 @@
 // Blog Post Page Logic
 // ===================================
 
-document.addEventListener('DOMContentLoaded', () => {
-  loadBlogPost();
+document.addEventListener('DOMContentLoaded', async () => {
+  await initBlogPost();
 });
 
-function loadBlogPost() {
+async function initBlogPost() {
+  // Wait for blog posts to load from main.js
+  if (window.loadBlogPosts) {
+    await window.loadBlogPosts();
+  }
+  
+  loadBlogPost();
+}
+
+async function loadBlogPost() {
   // Support both /blog?slug=xxx and /blog/xxx URL formats
   const urlParams = new URLSearchParams(window.location.search);
   let slug = urlParams.get('slug');
@@ -25,7 +34,7 @@ function loadBlogPost() {
   }
 
   // Check if blogPosts is available from main.js
-  if (!window.blogPosts) {
+  if (!window.blogPosts || window.blogPosts.length === 0) {
     console.error('Blog posts data not found. Ensure main.js is loaded.');
     showNotFound();
     return;
@@ -34,6 +43,17 @@ function loadBlogPost() {
   const post = window.blogPosts.find(p => p.slug === slug);
 
   if (!post) {
+    showNotFound();
+    return;
+  }
+
+  // Fetch the markdown content
+  try {
+    const response = await fetch(`/content/blog/posts/${slug}.md`);
+    if (!response.ok) throw new Error('Failed to fetch blog content');
+    post.content = await response.text();
+  } catch (e) {
+    console.error('Failed to load blog content:', e);
     showNotFound();
     return;
   }

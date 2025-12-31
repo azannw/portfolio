@@ -1,0 +1,39 @@
+[
+  {
+    "id": "5",
+    "title": "The Career Dilemma in Pakistan: Why We Follow Dreams That Are Not Ours",
+    "date": "2025-12-31",
+    "slug": "career-dilemma-pakistan",
+    "excerpt": "In Pakistan, children rarely get to choose their own career path. Society decides for them. But real success comes from following what truly makes you feel alive."
+  },
+  {
+    "id": "4",
+    "title": "Complete Guide to Setting up SFML 3 in Visual Studio Community Insiders on Windows",
+    "date": "2025-12-09",
+    "slug": "sfml-3-setup-visual-studio-insiders-windows",
+    "excerpt": "A step-by-step setup that actually works for SFML 3 with Visual Studio Community Insiders on Windows.",
+    "image": "https://azanw.com/sfml-vs-preview.png"
+  },
+  {
+    "id": "3",
+    "title": "Why and How to Learn Tech as a Medical Student",
+    "date": "2025-01-16",
+    "slug": "why-how-learn-tech-medical-student",
+    "excerpt": "Want to stand out from thousands of other medical students? Discover how learning tech can give you multiple career pathways."
+  },
+  {
+    "id": "1",
+    "title": "Why is FAST so famous for its CS?",
+    "date": "2025-05-22",
+    "slug": "fast-cs-why-famous",
+    "excerpt": "I first heard about FAST when I was in my second year of college. It was my biology teacher who mentioned it casually in class."
+  },
+  {
+    "id": "2",
+    "title": "Transitioning from Pre-Medical to FAST",
+    "date": "2025-05-01",
+    "slug": "pre-med-to-fast-transition",
+    "excerpt": "How a Pre-Med Student Can Get Into FAST for Computing Programs? If you are a pre-medical student thinking about switching to Computer Science at FAST, the first thing you need to do is pause and ask yourself one simple question: Do I really want to do this?"
+  }
+]
+
