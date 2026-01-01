@@ -47,73 +47,35 @@ async function loadBlogPost() {
     return;
   }
 
-  // Try to load from cache first for instant display
-  let content = null;
-  if (window.getCachedBlogPostContent) {
-    content = window.getCachedBlogPostContent(slug);
-    if (content) {
-      post.content = content;
-      // Render immediately with cached content
-      updateMetaTags(post);
-      renderPost(post);
-      updateShareButtons(post);
-      
-      // Hide loading and show article
-      const loading = document.getElementById('loading');
-      if (loading) loading.style.display = 'none';
-      const notFound = document.getElementById('not-found');
-      if (notFound) notFound.style.display = 'none';
-      const article = document.getElementById('post-article');
-      if (article) article.style.display = 'block';
-    }
-  }
-  
-  // Fetch fresh content in background (or immediately if no cache)
+  // Fetch the markdown content
   try {
     const response = await fetch(`/content/blog/posts/${slug}.md`);
     if (!response.ok) throw new Error('Failed to fetch blog content');
-    const freshContent = await response.text();
-    
-    // Only update if content changed
-    if (freshContent !== content) {
-      post.content = freshContent;
-      
-      // Update UI if we already rendered cached content
-      if (content) {
-        renderPost(post);
-      } else {
-        // First time load - render now
-        updateMetaTags(post);
-        renderPost(post);
-        updateShareButtons(post);
-        
-        // Hide loading and show article
-        const loading = document.getElementById('loading');
-        if (loading) loading.style.display = 'none';
-        const notFound = document.getElementById('not-found');
-        if (notFound) notFound.style.display = 'none';
-        const article = document.getElementById('post-article');
-        if (article) article.style.display = 'block';
-      }
-    }
-    
-    // Cache the fresh content
-    if (window.cacheBlogPostContent) {
-      await window.cacheBlogPostContent(slug, freshContent);
-    }
+    post.content = await response.text();
   } catch (e) {
     console.error('Failed to load blog content:', e);
-    // If we have cached content, keep showing it (already displayed)
-    if (!content) {
-      // No cache and fetch failed - show 404
-      showNotFound();
-      return;
-    }
-    // Otherwise, cached content is already displayed, just log the error
+    showNotFound();
+    return;
   }
 
-  // Note: Meta tags, rendering, and share buttons are now handled
-  // inside the content loading logic above
+  // Update Metadata
+  updateMetaTags(post);
+  
+  // Render Content
+  renderPost(post);
+  
+  // Update Share Links
+  updateShareButtons(post);
+
+  // Hide loading and 404, show article
+  const loading = document.getElementById('loading');
+  if (loading) loading.style.display = 'none';
+  
+  const notFound = document.getElementById('not-found');
+  if (notFound) notFound.style.display = 'none';
+  
+  const article = document.getElementById('post-article');
+  if (article) article.style.display = 'block';
 }
 
 function renderPost(post) {
