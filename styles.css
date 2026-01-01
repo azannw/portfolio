@@ -7,26 +7,88 @@
   --text-primary: #e6e6e6;
   --text-secondary: #888888;
   --text-dim: #444444;
-  
+
   --accent-color: #ff3333; /* Tech Red */
   --accent-hover: #ff0000;
-  
+
   --border-color: #222222;
   --border-active: #444444;
-  
+
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   --font-sans: 'Inter', system-ui, sans-serif;
-  
+
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
   --spacing-md: 2rem;
   --spacing-lg: 4rem;
   --spacing-xl: 8rem;
-  
+
   --container-width: 900px;
-  
+
   --transition-fast: 0.1s ease;
   --transition-smooth: 0.3s ease;
+}
+
+/* Light Theme */
+[data-theme="light"] {
+  --bg-color: #fafafa;
+  --surface-color: #ffffff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #555555;
+  --text-dim: #999999;
+
+  --accent-color: #dc2626;
+  --accent-hover: #b91c1c;
+
+  --border-color: #e5e5e5;
+  --border-active: #d4d4d4;
+}
+
+/* ===================================
+   Theme Toggle Button
+   =================================== */
+.theme-toggle {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-fast);
+  color: var(--text-secondary);
+  margin-left: 1rem;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  border-color: var(--text-dim);
+  color: var(--text-primary);
+}
+
+.theme-toggle svg {
+  width: 14px;
+  height: 14px;
+}
+
+.theme-toggle .icon-sun {
+  display: none;
+}
+
+.theme-toggle .icon-moon {
+  display: none;
+}
+
+/* Light mode: show moon (click to go dark) */
+[data-theme="light"] .theme-toggle .icon-moon {
+  display: block;
+}
+
+/* Dark mode: show sun (click to go light) */
+[data-theme="dark"] .theme-toggle .icon-sun {
+  display: block;
 }
 
 /* ===================================
@@ -133,6 +195,10 @@ button {
   z-index: 1000;
   display: flex;
   align-items: center;
+}
+
+[data-theme="light"] .navbar {
+  background: rgba(250, 250, 250, 0.85);
 }
 
 .navbar-content {
@@ -568,9 +634,14 @@ article + footer {
   .nav-links {
     display: none !important;
   }
-  
+
   .menu-toggle {
     display: block;
+  }
+
+  .theme-toggle {
+    margin-left: auto;
+    margin-right: 0.75rem;
   }
   
   .projects-grid {

@@ -31,21 +31,46 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="styles.css">
+    <script>
+      // Apply theme immediately to prevent flash
+      (function() {
+        const theme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
   </head>
   <body>
     <!-- Navbar -->
     <nav class="navbar">
       <div class="container navbar-content">
         <a href="#" class="logo">aw<span>.</span></a>
-        
+
         <div class="nav-links">
           <a href="#about" class="nav-link">about</a>
           <a href="#projects" class="nav-link">projects</a>
           <a href="#community" class="nav-link">community</a>
           <a href="#blog" class="nav-link">blog</a>
-          <a href="/mentorship" class="nav-link text-accent">mentorship</a>
+          <a href="mentorship.html" class="nav-link text-accent">mentorship</a>
           <a href="#contact" class="nav-link">contact</a>
         </div>
+
+        <!-- Theme Toggle -->
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
 
         <button class="menu-toggle text-primary" onclick="toggleMobileMenu()">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -62,7 +87,7 @@
         <a href="#projects" class="mobile-nav-link" onclick="toggleMobileMenu()">~/projects</a>
         <a href="#community" class="mobile-nav-link" onclick="toggleMobileMenu()">~/community</a>
         <a href="#blog" class="mobile-nav-link" onclick="toggleMobileMenu()">~/blog</a>
-        <a href="/mentorship" class="mobile-nav-link text-accent" onclick="toggleMobileMenu()">~/mentorship</a>
+        <a href="mentorship.html" class="mobile-nav-link text-accent" onclick="toggleMobileMenu()">~/mentorship</a>
         <a href="#contact" class="mobile-nav-link" onclick="toggleMobileMenu()">~/contact</a>
       </div>
     </nav>
@@ -304,7 +329,7 @@
             <p class="text-secondary" style="margin-bottom: 1rem; font-size: 0.9rem;">
               You can also book a 1:1 session with me to discuss your career, personal brand, or studies.
             </p>
-            <a href="/mentorship" class="contact-value text-accent" style="font-weight: bold; font-size: 0.95rem;">[ Book a 1:1 Session ]</a>
+            <a href="mentorship.html" class="contact-value text-accent" style="font-weight: bold; font-size: 0.95rem;">[ Book a 1:1 Session ]</a>
           </div>
         </div>
       </div>
@@ -313,7 +338,7 @@
     <!-- Footer -->
     <footer>
       <div class="container">
-        <div>&copy; 2025 Azan Waseem</div>
+        <div>&copy; 2026 Azan Waseem</div>
       </div>
     </footer>
 

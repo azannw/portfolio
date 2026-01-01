@@ -128,7 +128,7 @@ function renderBlogPosts() {
   const sorted = [...blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
   
   list.innerHTML = sorted.map(post => `
-    <a href="/blog?slug=${post.slug}" class="blog-row">
+    <a href="blog.html?slug=${post.slug}" class="blog-row">
       <div class="blog-date">${formatDate(post.date)}</div>
       <div class="blog-title">${post.title}</div>
     </a>
@@ -158,6 +158,19 @@ function toggleMobileMenu() {
   }
 }
 
+// ===================================
+// Theme Toggle
+// ===================================
+function toggleTheme() {
+  const html = document.documentElement;
+  const currentTheme = html.getAttribute('data-theme') || 'dark';
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+  html.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+}
+
 // Make globally available
 window.toggleMobileMenu = toggleMobileMenu;
 window.formatDate = formatDate;
+window.toggleTheme = toggleTheme;
