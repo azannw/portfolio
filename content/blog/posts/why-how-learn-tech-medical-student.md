@@ -95,6 +95,3 @@ Also join healthcare IT professionals on LinkedIn, attend local tech meetups in 
 "What if I learn the wrong thing", Start with fundamentals and pick one domain. You can always pivot later, and foundational skills transfer between domains.
 
 The healthcare industry is transforming rapidly, and there's room for medical professionals who understand both medicine and technology. Your medical background isn't a limitation, it's your superpower in the tech world. The combination of clinical knowledge and technical skills is rare and valuable.
-
-Join our [MedTech community](https://chat.whatsapp.com/BTtOPTQArHZCQE54csLQhF), start learning today, and discover opportunities that most of your classmates don't even know exist.
-
