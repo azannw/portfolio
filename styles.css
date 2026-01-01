@@ -618,7 +618,12 @@ footer {
   color: var(--text-dim);
   text-align: center;
   border-top: 1px solid var(--border-color);
-  margin-top: 4rem; /* Space above footer */
+  margin-top: 4rem;
+}
+
+/* Remove border from last section before footer */
+#contact {
+  border-bottom: none;
 }
 
 /* Blog page footer - more space from share section */

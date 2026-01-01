@@ -47,15 +47,31 @@ function fetchUserIP() {
   const el = document.getElementById('user-ip');
   if (!el) return;
 
-  fetch('https://api.ipify.org?format=json')
-    .then(response => response.json())
-    .then(data => {
-      el.textContent = data.ip;
-    })
-    .catch(e => {
-      console.log('IP fetch failed');
-      el.textContent = 'there'; // Fallback
-    });
+  // Try multiple IP APIs with fallbacks
+  const apis = [
+    { url: 'https://api.ipify.org?format=json', getIP: data => data.ip },
+    { url: 'https://ipapi.co/json/', getIP: data => data.ip },
+    { url: 'https://api.ip.sb/geoip', getIP: data => data.ip }
+  ];
+
+  async function tryAPIs() {
+    for (const api of apis) {
+      try {
+        const response = await fetch(api.url);
+        const data = await response.json();
+        const ip = api.getIP(data);
+        if (ip) {
+          el.textContent = ip;
+          return;
+        }
+      } catch (e) {
+        continue;
+      }
+    }
+    el.textContent = 'there';
+  }
+
+  tryAPIs();
 }
 
 function startTypewriter() {
