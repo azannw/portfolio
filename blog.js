@@ -143,48 +143,51 @@ function showNotFound() {
 // Markdown Parser
 function parseMarkdown(text) {
   if (!text) return '';
-  
-  let html = text;
-  
-  // Code Blocks
-  html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
-    return `<pre><code class="${lang || ''}">${escapeHtml(code.trim())}</code></pre>`;
+  // Normalize line endings so regex works on Windows (\r\n)
+  let html = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+
+  // Code Blocks (must run first; support \r\n after ```)
+  html = html.replace(/```(\w+)?\r?\n([\s\S]*?)```/g, (match, lang, code) => {
+    return `<pre><code class="language-${lang || 'text'}">${escapeHtml(code.trim())}</code></pre>`;
   });
-  
-  // Inline Code
-  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
-  
-  // Headers
-  html = html.replace(/^### (.*$)/gm, '<h3>$1</h3>');
-  html = html.replace(/^## (.*$)/gm, '<h2>$1</h2>');
-  html = html.replace(/^# (.*$)/gm, '<h1>$1</h1>');
-  
-  // Bold/Italic
-  html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-  html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
-  
+
+  // Inline Code (skip backticks inside angle brackets to avoid breaking tags)
+  html = html.replace(/`([^`\n]+)`/g, '<code>$1</code>');
+
+  // Headers (must be at line start)
+  html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+  html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+  html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+
+  // Bold then Italic (bold first so ** is not broken by *)
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/\*([^*\n]+?)\*/g, '<em>$1</em>');
+
   // Links
   html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
-  
-  // Blockquotes
-  html = html.replace(/^> (.*$)/gm, '<blockquote>$1</blockquote>');
-  
-  // Lists (Basic support)
-  html = html.replace(/^\- (.*$)/gm, '<ul><li>$1</li></ul>'); // This is naive, creates ul for each li
-  html = html.replace(/<\/ul>\s*<ul>/g, ''); // Fix adjacent uls
-  
-  // Paragraphs (Split by double newline)
-  // Be careful not to wrap block tags in p
+
+  // Blockquotes (single or multi-line)
+  html = html.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
+  html = html.replace(/<\/blockquote>\s*<blockquote>/g, '\n');
+
+  // Unordered lists
+  html = html.replace(/^[\-\*] (.+)$/gm, '<ul><li>$1</li></ul>');
+  html = html.replace(/<\/ul>\s*<ul>/g, '');
+
+  // Ordered lists (e.g. "1. Item")
+  html = html.replace(/^\d+\. (.+)$/gm, '<ol><li>$1</li></ol>');
+  html = html.replace(/<\/ol>\s*<ol>/g, '');
+
+  // Paragraphs: split by double newline, wrap non-block content in <p>
+  const blockStarts = /^<(?:h[1-6]|pre|ul|ol|blockquote|code)/;
   const parts = html.split(/\n\n+/);
   html = parts.map(part => {
     part = part.trim();
     if (!part) return '';
-    if (part.startsWith('<h') || part.startsWith('<pre') || part.startsWith('<ul') || part.startsWith('<blockquote')) {
-      return part;
-    }
+    if (blockStarts.test(part)) return part;
     return `<p>${part}</p>`;
-  }).join('');
-  
+  }).join('\n');
+
   return html;
 }
 

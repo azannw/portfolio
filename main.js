@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 function initializeApp() {
+  initPreloader();
   fetchUserIP();
   startTypewriter();
   startUptimeCounter();
@@ -81,10 +82,10 @@ function startTypewriter() {
     "I Love Low-Level Code",
     "I Help Students Grow"
   ];
-  
+
   const el = document.getElementById('typewriter-text');
   if (!el) return;
-  
+
   let roleIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
@@ -92,7 +93,7 @@ function startTypewriter() {
 
   function type() {
     const currentRole = roles[roleIndex];
-    
+
     if (isDeleting) {
       el.textContent = currentRole.substring(0, charIndex - 1);
       charIndex--;
@@ -121,17 +122,17 @@ function startTypewriter() {
 function startUptimeCounter() {
   const el = document.getElementById('uptime');
   if (!el) return;
-  
+
   const start = new Date();
-  
+
   setInterval(() => {
     const now = new Date();
     const diff = Math.floor((now - start) / 1000);
-    
+
     const h = Math.floor(diff / 3600).toString().padStart(2, '0');
     const m = Math.floor((diff % 3600) / 60).toString().padStart(2, '0');
     const s = (diff % 60).toString().padStart(2, '0');
-    
+
     el.textContent = `${h}:${m}:${s}`;
   }, 1000);
 }
@@ -142,7 +143,7 @@ function renderBlogPosts() {
 
   // Sort by date desc
   const sorted = [...blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
-  
+
   list.innerHTML = sorted.map(post => `
     <a href="blog.html?slug=${post.slug}" class="blog-row">
       <div class="blog-date">${formatDate(post.date)}</div>
@@ -190,3 +191,41 @@ function toggleTheme() {
 window.toggleMobileMenu = toggleMobileMenu;
 window.formatDate = formatDate;
 window.toggleTheme = toggleTheme;
+
+// ===================================
+// Preloader: only on first visit or reload; never on back/forward or when navigating from another page
+// ===================================
+const PRELOADER_SEEN_KEY = 'preloaderSeen';
+
+function initPreloader() {
+  const preloader = document.getElementById('preloader');
+  if (!preloader) return;
+
+  const nav = performance.getEntriesByType?.('navigation')[0];
+  const legacyType = performance.navigation?.type; // 0=navigate, 1=reload, 2=back_forward
+  const navType = nav?.type ?? (legacyType === 2 ? 'back_forward' : legacyType === 1 ? 'reload' : 'navigate');
+
+  // Back/forward: never show
+  if (navType === 'back_forward') {
+    preloader.classList.add('hidden');
+    setTimeout(() => preloader.remove(), 100);
+    return;
+  }
+
+  // Navigate (e.g. came from blog.html to index): show only if first time this session
+  if (navType === 'navigate' && sessionStorage.getItem(PRELOADER_SEEN_KEY)) {
+    preloader.classList.add('hidden');
+    setTimeout(() => preloader.remove(), 100);
+    return;
+  }
+
+  // Reload or first visit: show full loader, then mark as seen
+  setTimeout(() => {
+    preloader.classList.add('hidden');
+    setTimeout(() => {
+      preloader.remove();
+      sessionStorage.setItem(PRELOADER_SEEN_KEY, '1');
+    }, 800);
+  }, 2200);
+}
+

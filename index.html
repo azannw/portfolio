@@ -1,353 +1,378 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/public/favicon1.png" />
-    <link rel="shortcut icon" type="image/png" href="/public/favicon1.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Primary Meta Tags -->
-    <title>Azan Waseem | CS Student & Community Builder</title>
-    <meta name="title" content="Azan Waseem | CS Student & Community Builder" />
-    <meta name="description" content="Computer Science student exploring low-level programming, C++, and building communities in Pakistan." />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://azanw.com" />
-    <meta property="og:title" content="Azan Waseem | CS Student & Community Builder" />
-    <meta property="og:description" content="Computer Science student exploring low-level programming, C++, and building communities in Pakistan." />
-    <meta property="og:image" content="https://azanw.com/link-preview.png" />
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/public/favicon1.png" />
+  <link rel="shortcut icon" type="image/png" href="/public/favicon1.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://azanw.com" />
-    <meta property="twitter:title" content="Azan Waseem | CS Student & Community Builder" />
-    <meta property="twitter:description" content="Computer Science student exploring low-level programming, C++, and building communities in Pakistan." />
-    <meta property="twitter:image" content="https://azanw.com/link-preview.png" />
+  <!-- Primary Meta Tags -->
+  <title>Azan Waseem | CS Student & Community Builder</title>
+  <meta name="title" content="Azan Waseem | CS Student & Community Builder" />
+  <meta name="description"
+    content="Computer Science student exploring low-level programming, C++, and building communities in Pakistan." />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://azanw.com" />
+  <meta property="og:title" content="Azan Waseem | CS Student & Community Builder" />
+  <meta property="og:description"
+    content="Computer Science student exploring low-level programming, C++, and building communities in Pakistan." />
+  <meta property="og:image" content="https://azanw.com/link-preview.png" />
 
-    <link rel="stylesheet" href="styles.css">
-    <script>
-      // Apply theme immediately to prevent flash
-      (function() {
-        const theme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', theme);
-      })();
-    </script>
-  </head>
-  <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-      <div class="container navbar-content">
-        <a href="#" class="logo">aw<span>.</span></a>
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://azanw.com" />
+  <meta property="twitter:title" content="Azan Waseem | CS Student & Community Builder" />
+  <meta property="twitter:description"
+    content="Computer Science student exploring low-level programming, C++, and building communities in Pakistan." />
+  <meta property="twitter:image" content="https://azanw.com/link-preview.png" />
 
-        <div class="nav-links">
-          <a href="#about" class="nav-link">about</a>
-          <a href="#projects" class="nav-link">projects</a>
-          <a href="#community" class="nav-link">community</a>
-          <a href="#blog" class="nav-link">blog</a>
-          <a href="mentorship.html" class="nav-link text-accent">mentorship</a>
-          <a href="#contact" class="nav-link">contact</a>
-        </div>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
 
-        <!-- Theme Toggle -->
-        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-        </button>
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Apply theme immediately to prevent flash
+    (function () {
+      const theme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
 
-        <button class="menu-toggle text-primary" onclick="toggleMobileMenu()">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-        </button>
+<body>
+  <!-- Preloader -->
+  <div id="preloader" class="preloader">
+    <div class="preloader-content">
+      <div class="glitch-text" data-text="AW.">AW<span>.</span></div>
+      <div class="loading-bar-container">
+        <div class="loading-bar"></div>
       </div>
-      
-      <!-- Mobile Menu -->
-      <div id="mobile-nav" class="mobile-nav">
-        <a href="#about" class="mobile-nav-link" onclick="toggleMobileMenu()">~/about</a>
-        <a href="#projects" class="mobile-nav-link" onclick="toggleMobileMenu()">~/projects</a>
-        <a href="#community" class="mobile-nav-link" onclick="toggleMobileMenu()">~/community</a>
-        <a href="#blog" class="mobile-nav-link" onclick="toggleMobileMenu()">~/blog</a>
-        <a href="mentorship.html" class="mobile-nav-link text-accent" onclick="toggleMobileMenu()">~/mentorship</a>
-        <a href="#contact" class="mobile-nav-link" onclick="toggleMobileMenu()">~/contact</a>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container navbar-content">
+      <a href="#" class="logo">aw<span>.</span></a>
+
+      <div class="nav-links">
+        <a href="#about" class="nav-link">about</a>
+        <a href="#blog" class="nav-link">blog</a>
+        <a href="#projects" class="nav-link">projects</a>
+        <a href="#community" class="nav-link">community</a>
+        <a href="mentorship.html" class="nav-link text-accent">mentorship</a>
+        <a href="#contact" class="nav-link">contact</a>
       </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero container">
-      <div class="hero-meta">
-        <span class="text-dim">Hello, <span id="user-ip">there</span></span>
+      <!-- Theme Toggle -->
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+
+      <button class="menu-toggle text-primary" onclick="toggleMobileMenu()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-nav" class="mobile-nav">
+      <a href="#about" class="mobile-nav-link" onclick="toggleMobileMenu()">~/about</a>
+      <a href="#blog" class="mobile-nav-link" onclick="toggleMobileMenu()">~/blog</a>
+      <a href="#projects" class="mobile-nav-link" onclick="toggleMobileMenu()">~/projects</a>
+      <a href="#community" class="mobile-nav-link" onclick="toggleMobileMenu()">~/community</a>
+      <a href="mentorship.html" class="mobile-nav-link text-accent" onclick="toggleMobileMenu()">~/mentorship</a>
+      <a href="#contact" class="mobile-nav-link" onclick="toggleMobileMenu()">~/contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero container">
+    <div class="hero-meta">
+      <span class="text-dim">Hello, <span id="user-ip">there</span></span>
+    </div>
+
+    <h1 class="hero-title">
+      <span id="typewriter-text">I am Azan Waseem</span><span class="cursor"></span>
+    </h1>
+
+    <div class="hero-subtitle">
+
+      <span class="text-secondary">Computer Science student and community builder. Exploring low level programming and
+        connecting people.</span>
+    </div>
+
+    <div class="status-line">
+      <span class="status-item"><span class="status-label">LOCATION</span> Pakistan</span>
+      <span class="status-item"><span class="status-label">CURRENT</span> Studying & Building</span>
+      <span class="status-item"><span class="status-label">UPTIME</span> <span id="uptime">Loading...</span></span>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">About</h2>
+        <span class="section-path">~/about/README.md</span>
       </div>
-      
-      <h1 class="hero-title">
-        <span id="typewriter-text">I am Azan Waseem</span><span class="cursor"></span>
-      </h1>
-      
-      <div class="hero-subtitle">
-        
-        <span class="text-secondary">Computer Science student and community builder. Exploring low level programming and connecting people.</span>
-      </div>
-      
-      <div class="status-line">
-        <span class="status-item"><span class="status-label">LOCATION</span> Pakistan</span>
-        <span class="status-item"><span class="status-label">CURRENT</span> Studying & Building</span>
-        <span class="status-item"><span class="status-label">UPTIME</span> <span id="uptime">Loading...</span></span>
-      </div>
-    </section>
 
-    <!-- About Section -->
-    <section id="about">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">About</h2>
-          <span class="section-path">~/about/README.md</span>
-        </div>
-        
-        <div class="about-grid">
-          <div class="about-content">
-            <p>
-              I am a Computer Science student in my 3rd semester at FAST, but my story actually started in a medical college.
-            </p>
-            <p>
-              I was studying for my MBBS when I realized that while I could become a doctor, my heart wasn't in it. I found myself drawn to logic, systems, and how computers work. I made the hard decision to drop out and pursue CS, and honestly, it was the best decision I ever made.
-            </p>
-            <p>
-              Now, I genuinely enjoy what I do. I founded <strong>CS Connect Pakistan</strong> in my first semester to bridge the gap between students and the tech industry. While many of my peers worry about grades, I've focused on building real experience, landing corporate jobs, and helping others grow along the way.
-            </p>
-            <p>
-              I build tools to make my own life easier. When they work well for me, I polish them up and share them with the world. That's how most of my projects happen, organic and useful.
-            </p>
-            <p class="text-dim">
-              Inspired by Shaykh Atif Ahmed and the idea of aligning work with purpose.
-            </p>
-            
-            <div style="margin-top: 1.5rem;">
-              <h3 class="text-primary mono" style="font-size: 1rem; margin-bottom: 0.5rem;">Interests_</h3>
-              <div class="tech-stack">
-                <span class="tech-tag">Low Level Programming</span>
-                <span class="tech-tag">C++ / Assembly / x86</span>
-                <span class="tech-tag">Computer Vision</span>
-                <span class="tech-tag">Cybersecurity</span>
-                <span class="tech-tag">CUDA / GPU Programming</span>
-                <span class="tech-tag">Math</span>
-                <span class="tech-tag">Tech Gadgets & PC Building</span>
-                <span class="tech-tag">Religion & History</span>
-                <span class="tech-tag">Public Speaking</span>
-                <span class="tech-tag">Community Building</span>
-              </div>
-            </div>
-          </div>
-          
-          <div class="profile-img-container">
-            <img src="my-pfp.jpeg" alt="Azan Waseem" class="profile-img">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Projects</h2>
-          <span class="section-path">~/projects/</span>
-        </div>
-
-        <div class="about-content" style="margin-bottom: 2rem;">
-          <p class="text-secondary">
-            I build tools that start as small scripts to solve my own problems. When they actually make my life easier, I polish them a bit and share them with others.
-          </p>
-          <p class="text-secondary">
-            You can view my projects on my <a href="https://github.com/azannw" target="_blank" class="text-accent">GitHub</a>, but here are two that added real value:
-          </p>
-        </div>
-        
-        <div class="projects-grid">
-          <!-- Project 1 -->
-          <article class="project-card">
-            <div class="project-header">
-              <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
-              </svg>
-              <div class="project-links">
-                <a href="https://fastgpa.vercel.app" target="_blank" class="project-link-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                    <polyline points="15 3 21 3 21 9"></polyline>
-                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <h3 class="project-title">FastGPA</h3>
-            <p class="project-desc">A GPA calculator specifically for FAST students. I built this to solve a personal pain point, and it turned out many others needed it too.</p>
-            <div class="project-tech">
-              <span>Utility</span>
-              <span>Web</span>
-            </div>
-          </article>
-
-          <!-- Project 2 -->
-          <article class="project-card">
-            <div class="project-header">
-              <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
-              </svg>
-              <div class="project-links">
-                <a href="https://unicalc.vercel.app" target="_blank" class="project-link-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                    <polyline points="15 3 21 3 21 9"></polyline>
-                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <h3 class="project-title">UniCalc</h3>
-            <p class="project-desc">A merit calculation tool for prospective students. Started as a hobby project, now used by many students to figure out their aggregate.</p>
-            <div class="project-tech">
-              <span>Tool</span>
-              <span>Education</span>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Community / Connect Section -->
-    <section id="community">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Connect & Learn</h2>
-          <span class="section-path">~/community/media.sh</span>
-        </div>
-
+      <div class="about-grid">
         <div class="about-content">
           <p>
-            I like connecting with people, sharing what I learn, and helping students avoid the mistakes I made.
+            I'm a second-year Computer Science student at FAST. I really care about building communities and connecting with people, whether through writing, conversations, or the podcasts I host.
           </p>
-          
-          <div class="projects-grid" style="margin-top: 2rem;">
-            <a href="https://youtube.com/@heyazan" target="_blank" class="stat-box" style="text-decoration: none; display: block; color: inherit;">
-              <div class="stat-number" style="font-size: 1.5rem;">YouTube</div>
-              <div class="stat-label">@heyazan</div>
-              <p class="text-dim" style="font-size: 0.8rem; margin-top: 0.5rem;">My personal channel where I share my life and tech stuff.</p>
-            </a>
-            
-            <a href="https://youtube.com/@csconnectpk" target="_blank" class="stat-box" style="text-decoration: none; display: block; color: inherit;">
-              <div class="stat-number" style="font-size: 1.5rem;">CS Connect Pakistan</div>
-              <div class="stat-label">@csconnectpk</div>
-              <p class="text-dim" style="font-size: 0.8rem; margin-top: 0.5rem;">Podcasts with professionals and sessions for students.</p>
-            </a>
-            
-            <a href="https://discord.gg/gWyvnmSRRF" target="_blank" class="stat-box" style="text-decoration: none; display: block; color: inherit;">
-              <div class="stat-number" style="font-size: 1.5rem;">Discord Server</div>
-              <div class="stat-label">Join the community</div>
-              <p class="text-dim" style="font-size: 0.8rem; margin-top: 0.5rem;">Interested to join our discord server? Connect with other students.</p>
-            </a>
-
-            <a href="https://chat.whatsapp.com/K1vRPmsHIgxJY842UPUjoB?mode=ems_copy_t" target="_blank" class="stat-box" style="text-decoration: none; display: block; color: inherit;">
-              <div class="stat-number" style="font-size: 1.5rem;">WhatsApp Community</div>
-              <div class="stat-label">Join the group</div>
-              <p class="text-dim" style="font-size: 0.8rem; margin-top: 0.5rem;">Stay updated with announcements and community discussions.</p>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Blog Section -->
-    <section id="blog">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Blog</h2>
-          <span class="section-path">~/blog/</span>
-        </div>
-        
-        <div id="blog-list" class="blog-list">
-          <!-- Blog posts injected by JS -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Contact</h2>
-          <span class="section-path">~/contact/socials.json</span>
-        </div>
-        
-        <div class="contact-grid">
-          <div class="contact-method">
-            <span class="contact-label">EMAIL</span>
-            <a href="mailto:itsazanwaseem@gmail.com" class="contact-value">itsazanwaseem@gmail.com</a>
-          </div>
-          
-          <div class="contact-method">
-            <span class="contact-label">LINKEDIN</span>
-            <a href="https://linkedin.com/in/azanw" target="_blank" class="contact-value">in/azanw</a>
-          </div>
-          
-          <div class="contact-method">
-            <span class="contact-label">INSTAGRAM</span>
-            <a href="https://instagram.com/heyazanw" target="_blank" class="contact-value">@heyazanw</a>
-          </div>
-
-          <div class="contact-method">
-            <span class="contact-label">X / TWITTER</span>
-            <a href="https://x.com/azannw" target="_blank" class="contact-value">@azannw</a>
-          </div>
-        </div>
-
-        <div style="margin-top: 2rem;">
-          <p class="text-secondary" style="margin-bottom: 2rem; font-size: 1.1rem;">
-            Whether you want to say salam, ask a question, or discuss an idea, feel free to reach out.
+          <p>
+            I love teaching people. At <strong>CS Connect Pakistan</strong> we do exactly that for free: conversations, podcasts, and sessions with people in tech. We put it all on <a href="https://youtube.com/@csconnectpk" target="_blank" rel="noopener noreferrer" class="text-accent">YouTube</a> so anyone can watch.
           </p>
-          
-          <div style="padding: 1.5rem; border: 1px solid var(--border-color); background: var(--surface-color);">
-            <h3 style="font-size: 1rem; margin-bottom: 0.5rem;" class="mono">> Need deeper guidance?</h3>
-            <p class="text-secondary" style="margin-bottom: 1rem; font-size: 0.9rem;">
-              You can also book a 1:1 session with me to discuss your career, personal brand, or studies.
-            </p>
-            <a href="mentorship.html" class="contact-value text-accent" style="font-weight: bold; font-size: 0.95rem;">[ Book a 1:1 Session ]</a>
+          <p>
+            I enjoy tinkering with hardware and low level stuff, breaking things, fixing them, and understanding how they work. Beyond tech I like reading about history and religion, and I'm trying to get better at Arabic.
+          </p>
+          <p>
+            Languages I use to talk to people: <strong>Urdu</strong>, <strong>English</strong>, and a bit of <strong>Arabic</strong> (still on my list to improve). To talk to the computer: <strong>C++</strong>, <strong>Python</strong>, and <strong>Java</strong>.
+          </p>
+
+          <div style="margin-top: 1.5rem;">
+            <h3 class="text-primary mono" style="font-size: 1rem; margin-bottom: 0.5rem;">Interests</h3>
+            <div class="tech-stack">
+              <span class="tech-tag">Low-level & systems</span>
+              <span class="tech-tag">Hardware tinkering</span>
+              <span class="tech-tag">Community building</span>
+              <span class="tech-tag">Podcasts & conversations</span>
+              <span class="tech-tag">History & religion</span>
+              <span class="tech-tag">C++ / Python / Java</span>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Footer -->
-    <footer>
-      <div class="container">
-        <div>&copy; 2026 Azan Waseem</div>
+        <div class="profile-img-container">
+          <img src="my-pfp.jpeg" alt="Azan Waseem" class="profile-img">
+        </div>
       </div>
-    </footer>
+    </div>
+  </section>
 
-    <!-- Scripts -->
-    <script>
-      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-    </script>
-    <script defer src="/_vercel/insights/script.js"></script>
-    <script src="/js/utils/cache.js?v=5"></script>
-    <script src="main.js?v=5"></script>
-  </body>
+  <!-- Blog Section -->
+  <section id="blog">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Blog</h2>
+        <span class="section-path">~/blog/</span>
+      </div>
+
+      <div id="blog-list" class="blog-list">
+        <!-- Blog posts injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Projects</h2>
+        <span class="section-path">~/projects/</span>
+      </div>
+
+      <div class="about-content" style="margin-bottom: 2rem;">
+        <p class="text-secondary">
+          I build tools that start as small scripts to solve my own problems. When they actually make my life easier, I
+          polish them a bit and share them with others.
+        </p>
+        <p class="text-secondary">
+          You can view my projects on my <a href="https://github.com/azannw" target="_blank"
+            class="text-accent">GitHub</a>, but here are two that added real value:
+        </p>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <article class="project-card">
+          <div class="project-header">
+            <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <div class="project-links">
+              <a href="https://fastgpa.vercel.app" target="_blank" class="project-link-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <h3 class="project-title">FastGPA</h3>
+          <p class="project-desc">A GPA calculator specifically for FAST students. I built this to solve a personal pain
+            point, and it turned out many others needed it too.</p>
+          <div class="project-tech">
+            <span>Utility</span>
+            <span>Web</span>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="project-card">
+          <div class="project-header">
+            <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <div class="project-links">
+              <a href="https://unicalc.vercel.app" target="_blank" class="project-link-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <h3 class="project-title">UniCalc</h3>
+          <p class="project-desc">A merit calculation tool for prospective students. Started as a hobby project, now
+            used by many students to figure out their aggregate.</p>
+          <div class="project-tech">
+            <span>Tool</span>
+            <span>Education</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Community / Connect Section -->
+  <section id="community">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Connect & Learn</h2>
+        <span class="section-path">~/community/media.sh</span>
+      </div>
+
+      <div class="about-content">
+        <p>
+          I like connecting with people, sharing what I learn, and helping students avoid the mistakes I made.
+        </p>
+
+        <div class="projects-grid" style="margin-top: 2rem;">
+          <a href="https://youtube.com/@heyazan" target="_blank" class="stat-box"
+            style="text-decoration: none; display: block; color: inherit;">
+            <div class="stat-number" style="font-size: 1.5rem;">YouTube</div>
+            <div class="stat-label">@heyazan</div>
+            <p class="text-dim" style="font-size: 0.8rem; margin-top: 0.5rem;">My personal channel where I share my life
+              and tech stuff.</p>
+          </a>
+
+          <a href="https://youtube.com/@csconnectpk" target="_blank" class="stat-box"
+            style="text-decoration: none; display: block; color: inherit;">
+            <div class="stat-number" style="font-size: 1.5rem;">CS Connect Pakistan</div>
+            <div class="stat-label">@csconnectpk</div>
+            <p class="text-dim" style="font-size: 0.8rem; margin-top: 0.5rem;">Podcasts with professionals and sessions
+              for students.</p>
+          </a>
+
+          <a href="https://discord.gg/gWyvnmSRRF" target="_blank" class="stat-box"
+            style="text-decoration: none; display: block; color: inherit;">
+            <div class="stat-number" style="font-size: 1.5rem;">Discord Server</div>
+            <div class="stat-label">Join the community</div>
+            <p class="text-dim" style="font-size: 0.8rem; margin-top: 0.5rem;">Interested to join our discord server?
+              Connect with other students.</p>
+          </a>
+
+          <a href="https://chat.whatsapp.com/K1vRPmsHIgxJY842UPUjoB?mode=ems_copy_t" target="_blank" class="stat-box"
+            style="text-decoration: none; display: block; color: inherit;">
+            <div class="stat-number" style="font-size: 1.5rem;">WhatsApp Community</div>
+            <div class="stat-label">Join the group</div>
+            <p class="text-dim" style="font-size: 0.8rem; margin-top: 0.5rem;">Stay updated with announcements and
+              community discussions.</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Contact</h2>
+        <span class="section-path">~/contact/socials.json</span>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-method">
+          <span class="contact-label">EMAIL</span>
+          <a href="mailto:itsazanwaseem@gmail.com" class="contact-value">itsazanwaseem@gmail.com</a>
+        </div>
+
+        <div class="contact-method">
+          <span class="contact-label">LINKEDIN</span>
+          <a href="https://linkedin.com/in/azanw" target="_blank" class="contact-value">in/azanw</a>
+        </div>
+
+        <div class="contact-method">
+          <span class="contact-label">INSTAGRAM</span>
+          <a href="https://instagram.com/heyazanw" target="_blank" class="contact-value">@heyazanw</a>
+        </div>
+
+        <div class="contact-method">
+          <span class="contact-label">X / TWITTER</span>
+          <a href="https://x.com/azannw" target="_blank" class="contact-value">@azannw</a>
+        </div>
+      </div>
+
+      <div style="margin-top: 2rem;">
+        <p class="text-secondary" style="margin-bottom: 2rem; font-size: 1.1rem;">
+          Whether you want to say salam, ask a question, or discuss an idea, feel free to reach out.
+        </p>
+
+        <div style="padding: 1.5rem; border: 1px solid var(--border-color); background: var(--surface-color);">
+          <h3 style="font-size: 1rem; margin-bottom: 0.5rem;" class="mono">> Need deeper guidance?</h3>
+          <p class="text-secondary" style="margin-bottom: 1rem; font-size: 0.9rem;">
+            You can also book a 1:1 session with me to discuss your career, personal brand, or studies.
+          </p>
+          <a href="mentorship.html" class="contact-value text-accent" style="font-weight: bold; font-size: 0.95rem;">[
+            Book a 1:1 Session ]</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div>&copy; 2026 Azan Waseem</div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script src="/js/utils/cache.js?v=5"></script>
+  <script src="main.js?v=5"></script>
+</body>
+
 </html>
