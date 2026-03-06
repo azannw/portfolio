@@ -265,18 +265,6 @@ button {
   color: var(--text-primary);
 }
 
-.nav-link::before {
-  content: '// ';
-  color: var(--text-dim);
-  opacity: 0;
-  transition: var(--transition-fast);
-}
-
-.nav-link:hover::before,
-.nav-link.active::before {
-  opacity: 1;
-  color: var(--accent-color);
-}
 
 /* Mobile Menu */
 .menu-toggle {
@@ -1005,64 +993,87 @@ article+footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.8s ease, visibility 0.8s ease;
+  transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
-.preloader.hidden {
-  opacity: 0;
-  visibility: hidden;
+.preloader.loaded {
+  transform: translateY(-100%);
+}
+
+body.loading {
+  overflow: hidden;
 }
 
 .preloader-content {
   text-align: center;
 }
 
-.glitch-text {
+.preloader-logo {
   font-family: var(--font-mono);
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 700;
   color: var(--text-primary);
-  position: relative;
-  margin-bottom: 20px;
-  letter-spacing: 5px;
-  margin-left: 18px;
-  /* Visual alignment adjustment */
+  letter-spacing: 2px;
+  margin-bottom: 1.5rem;
+  padding-left: 0.35em;
+  opacity: 0;
+  animation: preloaderFadeIn 0.5s ease forwards;
 }
 
-.preloader .glitch-text span {
+.preloader-logo span {
   color: var(--accent-color);
 }
 
+@keyframes preloaderFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .loading-bar-container {
-  width: 200px;
-  max-width: 80vw;
+  width: 160px;
+  max-width: 60vw;
   height: 2px;
   background: var(--border-color);
   margin: 0 auto;
-  position: relative;
   overflow: hidden;
+  border-radius: 1px;
+  opacity: 0;
+  animation: preloaderFadeIn 0.4s ease 0.3s forwards;
 }
 
 .loading-bar {
-  position: absolute;
-  top: 0;
-  left: 0;
   height: 100%;
   width: 0%;
   background: var(--accent-color);
-  animation: loading 2s ease forwards;
+  transition: width 0.5s ease;
 }
 
-@keyframes loading {
-  0% {
-    width: 0;
-  }
+/* ===================================
+   Section Reveal Animation
+   =================================== */
+.section-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-  50% {
-    width: 70%;
-  }
+.section-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-  100% {
-    width: 100%;
-  }
+/* ===================================
+   More Projects Link
+   =================================== */
+.more-projects-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+.more-projects-link:hover {
+  color: var(--accent-color);
 }

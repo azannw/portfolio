@@ -3,41 +3,48 @@
 // ===================================
 let blogPosts = [];
 
-// Load blog posts from JSON file
+const BLOG_POSTS_FALLBACK = [
+  {"id":"5","title":"The Career Dilemma in Pakistan: Why We Follow Dreams That Are Not Ours","date":"2025-12-31","slug":"career-dilemma-pakistan","excerpt":"In Pakistan, children rarely get to choose their own career path. Society decides for them. But real success comes from following what truly makes you feel alive."},
+  {"id":"4","title":"Complete Guide to Setting up SFML 3 in Visual Studio Community Insiders on Windows","date":"2025-12-09","slug":"sfml-3-setup-visual-studio-insiders-windows","excerpt":"A step-by-step setup that actually works for SFML 3 with Visual Studio Community Insiders on Windows.","image":"https://azanw.com/sfml-vs-preview.png"},
+  {"id":"3","title":"Why and How to Learn Tech as a Medical Student","date":"2025-01-16","slug":"why-how-learn-tech-medical-student","excerpt":"Want to stand out from thousands of other medical students? Discover how learning tech can give you multiple career pathways."},
+  {"id":"1","title":"Why is FAST so famous for its CS?","date":"2025-05-22","slug":"fast-cs-why-famous","excerpt":"I first heard about FAST when I was in my second year of college. It was my biology teacher who mentioned it casually in class."},
+  {"id":"2","title":"Transitioning from Pre-Medical to FAST","date":"2025-05-01","slug":"pre-med-to-fast-transition","excerpt":"How a Pre-Med Student Can Get Into FAST for Computing Programs?"}
+];
+
 async function loadBlogPosts() {
   try {
-    const response = await fetch('/content/blog/posts.json');
+    const response = await fetch('content/blog/posts.json');
+    if (!response.ok) throw new Error('fetch failed');
     blogPosts = await response.json();
-    window.blogPosts = blogPosts;
-    return blogPosts;
   } catch (e) {
-    console.error('Failed to load blog posts:', e);
-    return [];
+    blogPosts = BLOG_POSTS_FALLBACK;
   }
+  window.blogPosts = blogPosts;
+  return blogPosts;
 }
 
-// Export for other scripts
 window.blogPosts = blogPosts;
 window.loadBlogPosts = loadBlogPosts;
 
 // ===================================
 // App Initialization
 // ===================================
-document.addEventListener('DOMContentLoaded', async () => {
-  await loadBlogPosts();
+document.addEventListener('DOMContentLoaded', () => {
   initializeApp();
 });
 
 function initializeApp() {
-  initPreloader();
   fetchUserIP();
-  startTypewriter();
   startUptimeCounter();
-  renderBlogPosts();
-
-  // Hash handling for navigation
   handleHashNavigation();
   window.addEventListener('hashchange', handleHashNavigation);
+
+  initPreloader((preloaderWasShown) => {
+    if (preloaderWasShown) {
+      startTypewriter();
+    }
+    initSectionReveals();
+  });
 }
 
 // ===================================
@@ -48,7 +55,6 @@ function fetchUserIP() {
   const el = document.getElementById('user-ip');
   if (!el) return;
 
-  // Try multiple IP APIs with fallbacks
   const apis = [
     { url: 'https://api.ipify.org?format=json', getIP: data => data.ip },
     { url: 'https://ipapi.co/json/', getIP: data => data.ip },
@@ -76,47 +82,22 @@ function fetchUserIP() {
 }
 
 function startTypewriter() {
-  const roles = [
-    "I'm Azan Waseem",
-    "I Build Communities",
-    "I Love Low-Level Code",
-    "I Help Students Grow"
-  ];
-
+  const text = "I'm Azan Waseem";
   const el = document.getElementById('typewriter-text');
   if (!el) return;
 
-  let roleIndex = 0;
-  let charIndex = 0;
-  let isDeleting = false;
-  let typeSpeed = 100;
+  el.textContent = '';
+  let i = 0;
 
   function type() {
-    const currentRole = roles[roleIndex];
-
-    if (isDeleting) {
-      el.textContent = currentRole.substring(0, charIndex - 1);
-      charIndex--;
-      typeSpeed = 50;
-    } else {
-      el.textContent = currentRole.substring(0, charIndex + 1);
-      charIndex++;
-      typeSpeed = 100;
+    if (i < text.length) {
+      el.textContent = text.substring(0, i + 1);
+      i++;
+      setTimeout(type, 70);
     }
-
-    if (!isDeleting && charIndex === currentRole.length) {
-      isDeleting = true;
-      typeSpeed = 2000; // Pause at end
-    } else if (isDeleting && charIndex === 0) {
-      isDeleting = false;
-      roleIndex = (roleIndex + 1) % roles.length;
-      typeSpeed = 500; // Pause before new word
-    }
-
-    setTimeout(type, typeSpeed);
   }
 
-  setTimeout(type, 500);
+  setTimeout(type, 200);
 }
 
 function startUptimeCounter() {
@@ -137,23 +118,7 @@ function startUptimeCounter() {
   }, 1000);
 }
 
-function renderBlogPosts() {
-  const list = document.getElementById('blog-list');
-  if (!list) return;
-
-  // Sort by date desc
-  const sorted = [...blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
-
-  list.innerHTML = sorted.map(post => `
-    <a href="blog.html?slug=${post.slug}" class="blog-row">
-      <div class="blog-date">${formatDate(post.date)}</div>
-      <div class="blog-title">${post.title}</div>
-    </a>
-  `).join('');
-}
-
 function formatDate(dateStr) {
-  // Return YYYY-MM-DD for that nerdy feel
   const d = new Date(dateStr);
   return d.toISOString().split('T')[0];
 }
@@ -187,45 +152,77 @@ function toggleTheme() {
   localStorage.setItem('theme', newTheme);
 }
 
-// Make globally available
 window.toggleMobileMenu = toggleMobileMenu;
 window.formatDate = formatDate;
 window.toggleTheme = toggleTheme;
 
 // ===================================
-// Preloader: only on first visit or reload; never on back/forward or when navigating from another page
+// Preloader (slide-up style)
 // ===================================
 const PRELOADER_SEEN_KEY = 'preloaderSeen';
 
-function initPreloader() {
+function initPreloader(onComplete) {
   const preloader = document.getElementById('preloader');
-  if (!preloader) return;
+  const fill = document.querySelector('.loading-bar');
+
+  if (!preloader) {
+    document.body.classList.remove('loading');
+    if (onComplete) onComplete(false);
+    return;
+  }
 
   const nav = performance.getEntriesByType?.('navigation')[0];
-  const legacyType = performance.navigation?.type; // 0=navigate, 1=reload, 2=back_forward
+  const legacyType = performance.navigation?.type;
   const navType = nav?.type ?? (legacyType === 2 ? 'back_forward' : legacyType === 1 ? 'reload' : 'navigate');
 
-  // Back/forward: never show
-  if (navType === 'back_forward') {
-    preloader.classList.add('hidden');
-    setTimeout(() => preloader.remove(), 100);
+  // Skip preloader: back/forward or already seen this session
+  if (navType === 'back_forward' || (navType === 'navigate' && sessionStorage.getItem(PRELOADER_SEEN_KEY))) {
+    preloader.remove();
+    document.body.classList.remove('loading');
+    if (onComplete) onComplete(false);
     return;
   }
 
-  // Navigate (e.g. came from blog.html to index): show only if first time this session
-  if (navType === 'navigate' && sessionStorage.getItem(PRELOADER_SEEN_KEY)) {
-    preloader.classList.add('hidden');
-    setTimeout(() => preloader.remove(), 100);
-    return;
-  }
+  // Clear hero text behind preloader so typewriter can type it fresh
+  const heroText = document.getElementById('typewriter-text');
+  if (heroText) heroText.textContent = '';
 
-  // Reload or first visit: show full loader, then mark as seen
-  setTimeout(() => {
-    preloader.classList.add('hidden');
+  // Fill bar on window load, then slide preloader up
+  window.addEventListener('load', () => {
+    if (fill) fill.style.width = '100%';
+
     setTimeout(() => {
-      preloader.remove();
+      preloader.classList.add('loaded');
+      document.body.classList.remove('loading');
       sessionStorage.setItem(PRELOADER_SEEN_KEY, '1');
-    }, 800);
-  }, 2200);
+
+      // Fire callback as slide begins (content is being revealed)
+      if (onComplete) onComplete(true);
+
+      // Remove from DOM after slide animation completes
+      setTimeout(() => preloader.remove(), 800);
+    }, 600);
+  });
 }
 
+// ===================================
+// Section Reveal on Scroll
+// ===================================
+function initSectionReveals() {
+  const sections = document.querySelectorAll('section:not(.hero)');
+  if (!sections.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  sections.forEach(section => {
+    section.classList.add('section-reveal');
+    observer.observe(section);
+  });
+}

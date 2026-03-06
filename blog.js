@@ -1,41 +1,69 @@
 // ===================================
-// Blog Post Page Logic
+// Blog Page Logic
+// Handles both listing and individual post views
 // ===================================
 
 document.addEventListener('DOMContentLoaded', async () => {
-  await initBlogPost();
-});
-
-async function initBlogPost() {
-  // Wait for blog posts to load from main.js
   if (window.loadBlogPosts) {
     await window.loadBlogPosts();
   }
-  
-  loadBlogPost();
-}
 
-async function loadBlogPost() {
-  // Support both /blog?slug=xxx and /blog/xxx URL formats
+  const slug = getSlugFromURL();
+  if (slug) {
+    // Hide listing, show post view
+    document.getElementById('blog-listing').style.display = 'none';
+    document.getElementById('blog-post-wrapper').style.display = 'block';
+    loadBlogPost(slug);
+  } else {
+    // Listing is already visible by default, just render posts
+    renderBlogListing();
+  }
+});
+
+// ===================================
+// URL Helpers
+// ===================================
+
+function getSlugFromURL() {
   const urlParams = new URLSearchParams(window.location.search);
   let slug = urlParams.get('slug');
-  
-  // If no query param, try to get slug from path
-  if (!slug) {
-    const pathMatch = window.location.pathname.match(/\/blog\/(.+)/);
-    if (pathMatch) {
-      slug = pathMatch[1];
-    }
-  }
 
   if (!slug) {
-    showNotFound();
+    const pathMatch = window.location.pathname.match(/\/blogs\/(.+)/);
+    if (pathMatch) slug = pathMatch[1];
+  }
+
+  return slug;
+}
+
+// ===================================
+// Blog Listing
+// ===================================
+
+function renderBlogListing() {
+  const list = document.getElementById('blog-list');
+  if (!list) return;
+
+  if (!window.blogPosts || window.blogPosts.length === 0) {
+    list.innerHTML = '<p class="text-secondary">No posts yet.</p>';
     return;
   }
 
-  // Check if blogPosts is available from main.js
+  const sorted = [...window.blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
+  list.innerHTML = sorted.map(post => `
+    <a href="/blogs/${post.slug}" class="blog-row">
+      <div class="blog-date">${window.formatDate ? window.formatDate(post.date) : post.date}</div>
+      <div class="blog-title">${post.title}</div>
+    </a>
+  `).join('');
+}
+
+// ===================================
+// Individual Blog Post
+// ===================================
+
+async function loadBlogPost(slug) {
   if (!window.blogPosts || window.blogPosts.length === 0) {
-    console.error('Blog posts data not found. Ensure main.js is loaded.');
     showNotFound();
     return;
   }
@@ -47,33 +75,25 @@ async function loadBlogPost() {
     return;
   }
 
-  // Fetch the markdown content
   try {
-    const response = await fetch(`/content/blog/posts/${slug}.md`);
+    const response = await fetch(`content/blog/posts/${slug}.md`);
     if (!response.ok) throw new Error('Failed to fetch blog content');
     post.content = await response.text();
   } catch (e) {
-    console.error('Failed to load blog content:', e);
-    showNotFound();
-    return;
+    // Fetch failed (likely file:// protocol) — show excerpt as fallback
+    post.content = `${post.excerpt}\n\n---\n\n*Full post available at [azanw.com/blogs/${slug}](https://azanw.com/blogs/${slug})*`;
   }
 
-  // Update Metadata
   updateMetaTags(post);
-  
-  // Render Content
   renderPost(post);
-  
-  // Update Share Links
   updateShareButtons(post);
 
-  // Hide loading and 404, show article
   const loading = document.getElementById('loading');
   if (loading) loading.style.display = 'none';
-  
+
   const notFound = document.getElementById('not-found');
   if (notFound) notFound.style.display = 'none';
-  
+
   const article = document.getElementById('post-article');
   if (article) article.style.display = 'block';
 }
@@ -85,7 +105,7 @@ function renderPost(post) {
 
   if (titleEl) titleEl.textContent = post.title;
   if (dateEl) dateEl.textContent = window.formatDate ? window.formatDate(post.date) : post.date;
-  
+
   if (bodyEl) {
     bodyEl.innerHTML = parseMarkdown(post.content);
   }
@@ -93,7 +113,7 @@ function renderPost(post) {
 
 function updateMetaTags(post) {
   document.title = `${post.title} | Azan Waseem`;
-  
+
   const setMeta = (id, val) => {
     const el = document.getElementById(id);
     if (el) el.setAttribute('content', val);
@@ -106,14 +126,12 @@ function updateMetaTags(post) {
   setMeta('twitter-title', post.title);
   setMeta('twitter-description', post.excerpt);
   const image = post.image || 'https://azanw.com/link-preview.png';
-  
-  // Image tags
+
   const ogImage = document.querySelector('meta[property="og:image"]');
   if (ogImage) ogImage.setAttribute('content', image);
   const twImage = document.querySelector('meta[property="twitter:image"]');
   if (twImage) twImage.setAttribute('content', image);
-  
-  // URL updates
+
   const url = window.location.href;
   setMeta('og-url', url);
   setMeta('twitter-url', url);
@@ -135,38 +153,40 @@ function updateShareButtons(post) {
 function showNotFound() {
   const loading = document.getElementById('loading');
   if (loading) loading.style.display = 'none';
-  
+
   const notFound = document.getElementById('not-found');
   if (notFound) notFound.style.display = 'block';
 }
 
+// ===================================
 // Markdown Parser
+// ===================================
+
 function parseMarkdown(text) {
   if (!text) return '';
-  // Normalize line endings so regex works on Windows (\r\n)
   let html = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
 
-  // Code Blocks (must run first; support \r\n after ```)
+  // Code Blocks
   html = html.replace(/```(\w+)?\r?\n([\s\S]*?)```/g, (match, lang, code) => {
     return `<pre><code class="language-${lang || 'text'}">${escapeHtml(code.trim())}</code></pre>`;
   });
 
-  // Inline Code (skip backticks inside angle brackets to avoid breaking tags)
+  // Inline Code
   html = html.replace(/`([^`\n]+)`/g, '<code>$1</code>');
 
-  // Headers (must be at line start)
+  // Headers
   html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
   html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
   html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
 
-  // Bold then Italic (bold first so ** is not broken by *)
+  // Bold then Italic
   html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
   html = html.replace(/\*([^*\n]+?)\*/g, '<em>$1</em>');
 
   // Links
   html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
 
-  // Blockquotes (single or multi-line)
+  // Blockquotes
   html = html.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
   html = html.replace(/<\/blockquote>\s*<blockquote>/g, '\n');
 
@@ -174,11 +194,11 @@ function parseMarkdown(text) {
   html = html.replace(/^[\-\*] (.+)$/gm, '<ul><li>$1</li></ul>');
   html = html.replace(/<\/ul>\s*<ul>/g, '');
 
-  // Ordered lists (e.g. "1. Item")
+  // Ordered lists
   html = html.replace(/^\d+\. (.+)$/gm, '<ol><li>$1</li></ol>');
   html = html.replace(/<\/ol>\s*<ol>/g, '');
 
-  // Paragraphs: split by double newline, wrap non-block content in <p>
+  // Paragraphs
   const blockStarts = /^<(?:h[1-6]|pre|ul|ol|blockquote|code)/;
   const parts = html.split(/\n\n+/);
   html = parts.map(part => {

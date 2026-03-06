@@ -2,9 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
     <link rel="icon" type="image/png" href="/public/favicon1.png" />
     <link rel="shortcut icon" type="image/png" href="/public/favicon1.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,7 +9,7 @@
     <title id="page-title">Blog | Azan Waseem</title>
     <meta name="title" id="meta-title" content="Blog | Azan Waseem" />
     <meta name="description" id="meta-description" content="Thoughts on software, community, and technology." />
-    
+
     <!-- Open Graph -->
     <meta property="og:type" content="article" />
     <meta property="og:url" id="og-url" content="https://azanw.com/blog" />
@@ -30,10 +27,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="/styles.css?v=3">
+
+    <link rel="stylesheet" href="styles.css?v=6">
     <script>
-      // Apply theme immediately to prevent flash
       (function() {
         const theme = localStorage.getItem('theme') || 'light';
         document.documentElement.setAttribute('data-theme', theme);
@@ -50,8 +46,7 @@
           <a href="index.html#about" class="nav-link">about</a>
           <a href="index.html#projects" class="nav-link">projects</a>
           <a href="index.html#community" class="nav-link">community</a>
-          <a href="index.html#blog" class="nav-link active">blog</a>
-          <a href="mentorship.html" class="nav-link">mentorship</a>
+          <a href="/blogs" class="nav-link active">blog</a>
           <a href="index.html#contact" class="nav-link">contact</a>
         </div>
 
@@ -82,24 +77,31 @@
       </div>
     </nav>
 
-    <!-- Blog Content -->
-    <div class="blog-post-wrapper">
-      <a href="index.html#blog" class="back-link">← ~/blog/</a>
-      
+    <!-- Blog Listing (default view, hidden by JS when viewing a post) -->
+    <div id="blog-listing" class="container" style="padding-top: 100px; padding-bottom: 4rem; min-height: calc(100vh - 80px);">
+      <h1 class="section-title" style="margin-bottom: 0.5rem;">Blog</h1>
+      <p class="text-secondary sans" style="margin-bottom: 2rem; font-size: 1rem;">Thoughts and things I've learned along the way.</p>
+      <div id="blog-list" class="blog-list">
+        <div class="text-secondary mono" id="blog-list-loading">Loading posts...</div>
+      </div>
+    </div>
+
+    <!-- Blog Post (hidden by default, shown by JS when slug is present) -->
+    <div id="blog-post-wrapper" class="blog-post-wrapper" style="display: none;">
+      <a href="/blogs" class="back-link">&larr; back to blog</a>
+
       <div id="loading" class="text-secondary mono">Loading...</div>
-      
+
       <article id="post-article" style="display: none;" class="post-content">
         <div class="post-meta">
           <span id="post-date"></span>
         </div>
         <h1 id="post-title"></h1>
-        
-        <div id="post-body">
-          <!-- Content goes here -->
-        </div>
+
+        <div id="post-body"></div>
 
         <div class="share-section">
-          <div class="text-dim mono share-label">Share this packet:</div>
+          <div class="text-dim mono share-label">Share:</div>
           <div class="share-links">
             <a id="share-whatsapp" href="#" target="_blank" class="contact-value">[ WhatsApp ]</a>
             <a id="share-facebook" href="#" target="_blank" class="contact-value">[ Facebook ]</a>
@@ -111,7 +113,7 @@
       <div id="not-found" style="display: none;">
         <h1>404: Post Not Found</h1>
         <p class="text-secondary">The requested resource could not be located.</p>
-        <a href="index.html" class="contact-value" style="margin-top: 1rem; display: inline-block;">[ Return Home ]</a>
+        <a href="/blogs" class="contact-value" style="margin-top: 1rem; display: inline-block;">[ Return to Blog ]</a>
       </div>
     </div>
 
@@ -127,7 +129,7 @@
       window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/insights/script.js"></script>
-    <script src="/main.js?v=5"></script>
-    <script src="/blog.js?v=5"></script>
+    <script src="main.js?v=6"></script>
+    <script src="blog.js?v=6"></script>
   </body>
 </html>
