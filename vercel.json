@@ -6,8 +6,11 @@
   "outputDirectory": ".",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/blogs/:slug", "destination": "/blog/:slug", "permanent": true },
+    { "source": "/blogs", "destination": "/blog", "permanent": true }
+  ],
   "rewrites": [
-    { "source": "/blogs", "destination": "/blog.html" },
-    { "source": "/blogs/:slug", "destination": "/blog.html" }
+    { "source": "/blog/:slug", "destination": "/blog.html" }
   ]
 }

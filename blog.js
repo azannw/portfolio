@@ -29,7 +29,7 @@ function getSlugFromURL() {
   let slug = urlParams.get('slug');
 
   if (!slug) {
-    const pathMatch = window.location.pathname.match(/\/blogs\/(.+)/);
+    const pathMatch = window.location.pathname.match(/\/blog\/(.+)/);
     if (pathMatch) slug = pathMatch[1];
   }
 
@@ -51,7 +51,7 @@ function renderBlogListing() {
 
   const sorted = [...window.blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
   list.innerHTML = sorted.map(post => `
-    <a href="/blogs/${post.slug}" class="blog-row">
+    <a href="/blog/${post.slug}" class="blog-row">
       <div class="blog-date">${window.formatDate ? window.formatDate(post.date) : post.date}</div>
       <div class="blog-title">${post.title}</div>
     </a>
@@ -81,7 +81,7 @@ async function loadBlogPost(slug) {
     post.content = await response.text();
   } catch (e) {
     // Fetch failed (likely file:// protocol) — show excerpt as fallback
-    post.content = `${post.excerpt}\n\n---\n\n*Full post available at [azanw.com/blogs/${slug}](https://azanw.com/blogs/${slug})*`;
+    post.content = `${post.excerpt}\n\n---\n\n*Full post available at [azanw.com/blog/${slug}](https://azanw.com/blog/${slug})*`;
   }
 
   updateMetaTags(post);
