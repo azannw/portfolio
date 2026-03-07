@@ -11,6 +11,6 @@
     { "source": "/blogs", "destination": "/blog", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/blog/:slug", "destination": "/blog/index.html" }
+    { "source": "/blog/:slug", "destination": "/blog" }
   ]
 }
