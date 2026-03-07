@@ -127,7 +127,7 @@ async function loadBlogPost(slug) {
     post.content = await response.text();
   } catch (e) {
     // Fetch failed (likely file:// protocol) — show excerpt as fallback
-    post.content = `${post.excerpt}\n\n*Full post available at [azanw.com/blog/${slug}](https://azanw.com/blog/${slug})*`;
+    post.content = `${post.excerpt}\n\n*Full post available at [azanw.com/blog/${slug}](https://www.azanw.com/blog/${slug})*`;
   }
 
   updateMetaTags(post);
@@ -174,7 +174,7 @@ function updateMetaTags(post) {
   setMeta('og-description', post.excerpt);
   setMeta('twitter-title', post.title);
   setMeta('twitter-description', post.excerpt);
-  const image = post.image || 'https://azanw.com/link-preview.png';
+  const image = post.image || 'https://www.azanw.com/link-preview.png';
 
   const ogImage = document.querySelector('meta[property="og:image"]');
   if (ogImage) ogImage.setAttribute('content', image);
