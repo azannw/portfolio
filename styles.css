@@ -570,6 +570,36 @@ section {
 }
 
 /* ===================================
+   Blog CTA (Homepage)
+   =================================== */
+.blog-cta {
+  margin-top: 1.25rem;
+}
+
+.blog-cta-text {
+  font-family: var(--font-sans);
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.blog-cta-btn {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+  padding: 0.6rem 1.25rem;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.blog-cta-btn:hover {
+  background: var(--accent-color);
+  color: var(--bg-color);
+}
+
+/* ===================================
    Blog List
    =================================== */
 .blog-list {
