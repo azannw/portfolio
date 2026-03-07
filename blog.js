@@ -127,7 +127,7 @@ async function loadBlogPost(slug) {
     post.content = await response.text();
   } catch (e) {
     // Fetch failed (likely file:// protocol) — show excerpt as fallback
-    post.content = `${post.excerpt}\n\n---\n\n*Full post available at [azanw.com/blog/${slug}](https://azanw.com/blog/${slug})*`;
+    post.content = `${post.excerpt}\n\n*Full post available at [azanw.com/blog/${slug}](https://azanw.com/blog/${slug})*`;
   }
 
   updateMetaTags(post);
@@ -150,7 +150,10 @@ function renderPost(post) {
   const bodyEl = document.getElementById('post-body');
 
   if (titleEl) titleEl.textContent = post.title;
-  if (dateEl) dateEl.textContent = window.formatDate ? window.formatDate(post.date) : post.date;
+  if (dateEl) {
+    const slug = post.slug || 'post';
+    dateEl.innerHTML = `<span class="bash-cmd" style="margin-bottom: 0;">$ cat ${slug}.md</span> <span style="margin-left: 0.5rem;">${window.formatDate ? window.formatDate(post.date) : post.date}</span>`;
+  }
 
   if (bodyEl) {
     bodyEl.innerHTML = parseMarkdown(post.content);
@@ -190,10 +193,20 @@ function updateShareButtons(post) {
   const wa = document.getElementById('share-whatsapp');
   const fb = document.getElementById('share-facebook');
   const li = document.getElementById('share-linkedin');
+  const cp = document.getElementById('share-copy');
 
   if (wa) wa.href = `https://wa.me/?text=${title}%20${url}`;
   if (fb) fb.href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
   if (li) li.href = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+  if (cp) {
+    cp.addEventListener('click', (e) => {
+      e.preventDefault();
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        cp.style.color = 'var(--accent-color)';
+        setTimeout(() => cp.style.color = '', 1500);
+      });
+    });
+  }
 }
 
 function showNotFound() {

@@ -35,15 +35,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initializeApp() {
   fetchUserIP();
-  startUptimeCounter();
   handleHashNavigation();
   window.addEventListener('hashchange', handleHashNavigation);
 
   initPreloader((preloaderWasShown) => {
-    if (preloaderWasShown) {
-      startTypewriter();
-    }
     initSectionReveals();
+    if (preloaderWasShown) {
+      // Wait for preloader slide-up to finish before typing
+      setTimeout(startTypewriter, 800);
+    }
   });
 }
 
@@ -75,48 +75,50 @@ function fetchUserIP() {
         continue;
       }
     }
-    el.textContent = 'there';
+    el.textContent = 'guest';
   }
 
   tryAPIs();
 }
 
 function startTypewriter() {
-  const text = "I'm Azan Waseem";
+  const phrases = ["welcome :)", "i'm azan waseem"];
   const el = document.getElementById('typewriter-text');
   if (!el) return;
 
   el.textContent = '';
-  let i = 0;
+  let phraseIdx = 0;
+  let charIdx = 0;
+  let deleting = false;
 
-  function type() {
-    if (i < text.length) {
-      el.textContent = text.substring(0, i + 1);
-      i++;
-      setTimeout(type, 70);
+  function tick() {
+    const current = phrases[phraseIdx];
+
+    if (!deleting) {
+      el.textContent = current.substring(0, charIdx + 1);
+      charIdx++;
+      if (charIdx === current.length) {
+        if (phraseIdx === phrases.length - 1) return;
+        setTimeout(() => { deleting = true; tick(); }, 1500);
+        return;
+      }
+      setTimeout(tick, 70);
+    } else {
+      el.textContent = current.substring(0, charIdx);
+      charIdx--;
+      if (charIdx === 0) {
+        deleting = false;
+        phraseIdx++;
+        setTimeout(tick, 400);
+        return;
+      }
+      setTimeout(tick, 40);
     }
   }
 
-  setTimeout(type, 200);
+  setTimeout(tick, 200);
 }
 
-function startUptimeCounter() {
-  const el = document.getElementById('uptime');
-  if (!el) return;
-
-  const start = new Date();
-
-  setInterval(() => {
-    const now = new Date();
-    const diff = Math.floor((now - start) / 1000);
-
-    const h = Math.floor(diff / 3600).toString().padStart(2, '0');
-    const m = Math.floor((diff % 3600) / 60).toString().padStart(2, '0');
-    const s = (diff % 60).toString().padStart(2, '0');
-
-    el.textContent = `${h}:${m}:${s}`;
-  }, 1000);
-}
 
 function formatDate(dateStr) {
   const d = new Date(dateStr);
