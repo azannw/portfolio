@@ -10,13 +10,49 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const slug = getSlugFromURL();
   if (slug) {
-    // Hide listing, show post view
-    document.getElementById('blog-listing').style.display = 'none';
-    document.getElementById('blog-post-wrapper').style.display = 'block';
-    loadBlogPost(slug);
+    showPostView(slug);
   } else {
-    // Listing is already visible by default, just render posts
     renderBlogListing();
+  }
+});
+
+// Handle browser back/forward buttons
+window.addEventListener('popstate', () => {
+  const slug = getSlugFromURL();
+  if (slug) {
+    showPostView(slug);
+  } else {
+    showListingView();
+  }
+});
+
+function showPostView(slug) {
+  document.getElementById('blog-listing').style.display = 'none';
+  document.getElementById('blog-post-wrapper').style.display = 'block';
+  // Reset post view state
+  const loading = document.getElementById('loading');
+  if (loading) loading.style.display = 'block';
+  const article = document.getElementById('post-article');
+  if (article) article.style.display = 'none';
+  const notFound = document.getElementById('not-found');
+  if (notFound) notFound.style.display = 'none';
+  loadBlogPost(slug);
+}
+
+function showListingView() {
+  document.getElementById('blog-listing').style.display = 'block';
+  document.getElementById('blog-post-wrapper').style.display = 'none';
+}
+
+// SPA back navigation
+document.addEventListener('DOMContentLoaded', () => {
+  const backLink = document.getElementById('back-to-blog');
+  if (backLink) {
+    backLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      history.pushState({}, '', '/blog');
+      showListingView();
+    });
   }
 });
 
@@ -51,11 +87,21 @@ function renderBlogListing() {
 
   const sorted = [...window.blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
   list.innerHTML = sorted.map(post => `
-    <a href="/blog/${post.slug}" class="blog-row">
+    <a href="/blog/${post.slug}" class="blog-row" data-slug="${post.slug}">
       <div class="blog-date">${window.formatDate ? window.formatDate(post.date) : post.date}</div>
       <div class="blog-title">${post.title}</div>
     </a>
   `).join('');
+
+  // SPA navigation — works on any static server without rewrites
+  list.querySelectorAll('.blog-row').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const slug = link.dataset.slug;
+      history.pushState({ slug }, '', `/blog/${slug}`);
+      showPostView(slug);
+    });
+  });
 }
 
 // ===================================
