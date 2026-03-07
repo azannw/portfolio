@@ -8,9 +8,11 @@
   "trailingSlash": false,
   "redirects": [
     { "source": "/blogs/:slug", "destination": "/blog/:slug", "permanent": true },
-    { "source": "/blogs", "destination": "/blog", "permanent": true }
+    { "source": "/blogs", "destination": "/blog", "permanent": true },
+    { "source": "/_blog", "destination": "/blog", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/blog/:slug", "destination": "/blog.html" }
+    { "source": "/blog/:slug", "destination": "/_blog.html" },
+    { "source": "/blog", "destination": "/_blog.html" }
   ]
 }
