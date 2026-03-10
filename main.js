@@ -181,6 +181,9 @@ function initPreloader(onComplete) {
   if (navType === 'back_forward' || (navType === 'navigate' && sessionStorage.getItem(PRELOADER_SEEN_KEY))) {
     preloader.remove();
     document.body.classList.remove('loading');
+    // Show final typewriter text so hero isn't empty
+    const heroEl = document.getElementById('typewriter-text');
+    if (heroEl) heroEl.textContent = "i'm azan waseem";
     if (onComplete) onComplete(false);
     return;
   }

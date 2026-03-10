@@ -36,10 +36,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Noto+Nastaliq+Urdu&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css?v=6">
+  <link rel="stylesheet" href="styles.css?v=7">
   <script>
     (function () {
       const theme = localStorage.getItem('theme') || 'dark';
@@ -120,7 +120,7 @@
     </h1>
 
     <p class="hero-subtitle">
-      cs student who dropped out of med. now i talk, sometimes with computers and sometimes with people. it's what i do.
+      cs student who dropped out of med. now i talk, sometimes with computers and sometimes with people. <span class="urdu">یہی تو کرتا ہوں۔</span>
     </p>
   </section>
 
@@ -128,6 +128,7 @@
   <section id="about">
     <div class="container">
       <div class="bash-cmd">$ cat about.txt</div>
+      <p class="section-subtitle"><span class="urdu" style="font-size: 0.85rem; color: var(--text-dim);">تھوڑا سا میرے بارے میں۔</span></p>
 
       <div class="about-grid">
         <div class="about-content">
@@ -168,6 +169,8 @@
   <section id="projects">
     <div class="container">
       <div class="bash-cmd">$ ls ~/projects/</div>
+
+      <p class="section-subtitle">projects i built while ignoring my exam prep. <span class="urdu" style="font-size: 0.85rem; color: var(--text-dim);">کیا کریں، شوق ہے۔</span></p>
 
       <div class="projects-list">
         <a href="https://csconnect.pk" target="_blank" class="project-row">
@@ -218,7 +221,7 @@
 
       <div class="blog-cta">
         <p class="blog-cta-text">
-          i also write sometimes. career advice, tech guides, and lessons from my own mistakes.
+          i also write sometimes. career advice, tech guides, and lessons from my own mistakes. <span class="urdu" style="font-size: 0.85rem; color: var(--text-dim);">تھوڑا سا لکھ بھی لیتا ہوں جی۔</span>
         </p>
         <a href="/blog" class="blog-cta-btn">read the blog &rarr;</a>
       </div>
@@ -231,7 +234,7 @@
       <div class="bash-cmd">$ open ~/community/</div>
 
       <p class="about-content" style="margin-top: 1.25rem; margin-bottom: 1.5rem;">
-        I like connecting with people, sharing what I learn, and helping students avoid the mistakes I made.
+        I like connecting with people, sharing what I learn, and helping students avoid the mistakes I made. <span class="urdu" style="font-size: 0.9rem; color: var(--text-dim);">ساتھ سیکھتے ہیں۔</span>
       </p>
 
       <div class="community-list">
@@ -279,9 +282,7 @@
     <div class="container">
       <div class="bash-cmd">$ ping azanw</div>
 
-      <p class="about-content" style="margin-top: 1.25rem; margin-bottom: 2rem;">
-        Whether you want to say salam, ask a question, or discuss an idea, feel free to reach out.
-      </p>
+      <p class="contact-subtitle">feel free to reach out.</p>
 
       <div class="contact-socials">
         <a href="mailto:hi@azanw.com" class="contact-social" aria-label="Email">
@@ -320,7 +321,7 @@
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
-  <script src="main.js?v=6"></script>
+  <script src="main.js?v=7"></script>
 </body>
 
 </html>
