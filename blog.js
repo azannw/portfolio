@@ -152,7 +152,7 @@ function renderPost(post) {
   if (titleEl) titleEl.textContent = post.title;
   if (dateEl) {
     const slug = post.slug || 'post';
-    dateEl.innerHTML = `<span class="bash-cmd" style="margin-bottom: 0;">$ cat ${slug}.md</span> <span style="margin-left: 0.5rem;">${window.formatDate ? window.formatDate(post.date) : post.date}</span>`;
+    dateEl.innerHTML = `<span class="bash-cmd" style="margin-bottom: 0;">$ cat ${slug}.md</span> <span>${window.formatDate ? window.formatDate(post.date) : post.date}</span>`;
   }
 
   if (bodyEl) {

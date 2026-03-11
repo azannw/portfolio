@@ -346,6 +346,10 @@ section {
   color: var(--accent-color);
   margin-bottom: var(--spacing-md);
   font-family: var(--font-mono);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.75rem;
 }
 
 .section-header {
