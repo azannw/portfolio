@@ -792,6 +792,7 @@ article+footer {
   }
 
   .mobile-nav {
+    display: block;
     position: fixed;
     top: 60px;
     right: 0;
@@ -807,12 +808,14 @@ article+footer {
     transform: translateY(-8px);
     transition: max-height 0.3s ease, opacity 0.2s ease, transform 0.3s ease;
     z-index: 999;
+    pointer-events: none;
   }
 
   .mobile-nav.open {
     max-height: 300px;
     opacity: 1;
     transform: translateY(0);
+    pointer-events: auto;
   }
 
   .mobile-nav-link {
