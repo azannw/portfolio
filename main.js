@@ -11,14 +11,14 @@ const BLOG_POSTS_FALLBACK = [
   {"id":"2","title":"Transitioning from Pre-Medical to FAST","date":"2025-05-01","slug":"pre-med-to-fast-transition","excerpt":"How a Pre-Med Student Can Get Into FAST for Computing Programs?"}
 ];
 
+// Start fetching posts.json immediately (don't wait for DOMContentLoaded)
+const _blogFetchPromise = fetch('content/blog/posts.json')
+  .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.json(); })
+  .catch(() => null);
+
 async function loadBlogPosts() {
-  try {
-    const response = await fetch('content/blog/posts.json');
-    if (!response.ok) throw new Error('fetch failed');
-    blogPosts = await response.json();
-  } catch (e) {
-    blogPosts = BLOG_POSTS_FALLBACK;
-  }
+  const data = await _blogFetchPromise;
+  blogPosts = data || BLOG_POSTS_FALLBACK;
   window.blogPosts = blogPosts;
   return blogPosts;
 }

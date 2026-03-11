@@ -28,11 +28,29 @@
     <meta property="twitter:description" id="twitter-description" content="Thoughts on software, community, and technology." />
     <meta property="twitter:image" id="twitter-image" content="https://www.azanw.com/link-preview.png" />
 
+    <!-- Preload blog data so it's ready before JS executes -->
+    <link rel="preload" href="/content/blog/posts.json" as="fetch" crossorigin>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="styles.css?v=7">
+    <link rel="stylesheet" href="styles.css?v=8">
+
+    <script>
+      // Preload markdown file if viewing a specific blog post
+      (function() {
+        var m = window.location.pathname.match(/\/blog\/(.+)/);
+        if (m && m[1]) {
+          var link = document.createElement('link');
+          link.rel = 'preload';
+          link.href = '/content/blog/posts/' + m[1] + '.md';
+          link.as = 'fetch';
+          link.crossOrigin = 'anonymous';
+          document.head.appendChild(link);
+        }
+      })();
+    </script>
     <script>
       (function() {
         const theme = localStorage.getItem('theme') || 'dark';
@@ -142,7 +160,7 @@
       window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/insights/script.js"></script>
-    <script src="main.js?v=7"></script>
-    <script src="blog.js?v=7"></script>
+    <script src="main.js?v=8"></script>
+    <script src="blog.js?v=8"></script>
   </body>
 </html>

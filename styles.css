@@ -649,52 +649,24 @@ section {
 /* ===================================
    Contact
    =================================== */
-.contact-subtitle {
+.contact-prose {
   font-family: var(--font-sans);
   color: var(--text-secondary);
   font-size: 1.1rem;
+  line-height: 1.8;
   margin-top: 1.25rem;
-  margin-bottom: 2rem;
 }
 
-.contact-socials {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2.5rem;
-}
-
-.contact-social {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.6rem;
+.contact-prose a {
+  color: var(--text-primary);
   text-decoration: none;
-  color: var(--text-dim);
-  transition: color 0.2s ease;
+  border-bottom: 1px solid var(--border-active);
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
-.contact-social:hover {
+.contact-prose a:hover {
   color: var(--accent-color);
-}
-
-.contact-social svg {
-  width: 28px;
-  height: 28px;
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-
-.contact-social:hover svg {
-  transform: translateY(-2px);
-}
-
-.contact-social span {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  transition: color 0.2s ease;
-}
-
-.contact-social:hover span {
-  color: var(--accent-color);
+  border-color: var(--accent-color);
 }
 
 /* Keep contact-value for blog share links */
@@ -765,17 +737,8 @@ article+footer {
   }
 
   /* Contact mobile */
-  .contact-socials {
-    gap: 1.75rem;
-  }
-
-  .contact-social svg {
-    width: 24px;
-    height: 24px;
-  }
-
-  .contact-social span {
-    font-size: 0.75rem;
+  .contact-prose {
+    font-size: 1rem;
   }
 
   .blog-row {
@@ -898,6 +861,62 @@ article+footer {
     max-width: 100%;
     overflow-x: auto;
     word-break: break-word;
+  }
+
+  /* Mobile text sizing — prevent distortion from larger desktop sizes */
+  .hero-subtitle {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .about-content {
+    font-size: 1rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .blog-cta-text {
+    font-size: 1rem;
+  }
+
+  .project-row-name {
+    font-size: 1.05rem;
+  }
+
+  .project-row-desc {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .project-row {
+    padding: 1.25rem;
+  }
+
+  .community-row-title {
+    font-size: 0.9rem;
+  }
+
+  .bash-cmd {
+    font-size: 0.85rem;
+  }
+
+  .blog-title {
+    font-size: 1rem;
+  }
+
+  .blog-cta-btn {
+    font-size: 0.85rem;
+    padding: 0.55rem 1.1rem;
+  }
+
+  .more-projects-link {
+    font-size: 0.85rem;
+  }
+
+  .hero-prompt {
+    font-size: 0.85rem;
   }
 
   /* Mentorship page mobile fix */
