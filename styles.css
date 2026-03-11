@@ -337,7 +337,7 @@ button {
 .page-content {
   padding-top: 100px;
   padding-bottom: 4rem;
-  min-height: calc(100vh - 80px);
+  flex: 1;
 }
 
 /* ===================================
