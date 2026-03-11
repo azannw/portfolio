@@ -338,6 +338,7 @@ button {
   padding-top: 100px;
   padding-bottom: 4rem;
   flex: 1;
+  width: 100%;
 }
 
 /* ===================================
@@ -465,18 +466,6 @@ section {
   margin-bottom: 1.5rem;
 }
 
-.about-currently {
-  margin-top: 2.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border-color);
-}
-
-.about-currently p {
-  font-family: var(--font-sans);
-  color: var(--text-secondary);
-  font-size: 1rem;
-  line-height: 1.7;
-}
 
 .section-subtitle {
   font-family: var(--font-sans);
@@ -615,16 +604,9 @@ section {
 .community-row-handle {
   font-size: 0.85rem;
   color: var(--text-dim);
+  margin-left: auto;
 }
 
-.community-row-desc {
-  margin-left: auto;
-  font-family: var(--font-sans);
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
 
 /* ===================================
    Blog CTA (Homepage)
@@ -765,13 +747,8 @@ article+footer {
   /* Projects mobile */
 
   /* Community mobile */
-  .community-row-desc {
+  .community-row-handle {
     display: none;
-  }
-
-  .community-row-body {
-    flex-direction: column;
-    gap: 0.1rem;
   }
 
   /* Contact mobile */
