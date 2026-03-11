@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/public/favicon1.png" />
+  <link rel="apple-touch-icon" href="/public/favicon1.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>About | Azan Waseem</title>
+  <meta name="description" content="CS student at FAST, founder of CS Connect Pakistan, and a guy who talks a lot." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css?v=10">
+  <script>
+    (function () {
+      const theme = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container navbar-content">
+      <a href="/" class="logo">aw<span>.</span></a>
+
+      <div class="nav-links">
+        <a href="/about" class="nav-link active">about</a>
+        <a href="/projects" class="nav-link">projects</a>
+        <a href="/community" class="nav-link">community</a>
+        <a href="/blog" class="nav-link">blog</a>
+        <a href="/contact" class="nav-link">contact</a>
+      </div>
+
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+
+      <button class="menu-toggle text-primary" id="menu-toggle" onclick="toggleMobileMenu()">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+
+    <div id="mobile-nav" class="mobile-nav">
+      <a href="/about" class="mobile-nav-link">about</a>
+      <a href="/projects" class="mobile-nav-link">projects</a>
+      <a href="/community" class="mobile-nav-link">community</a>
+      <a href="/blog" class="mobile-nav-link">blog</a>
+      <a href="/contact" class="mobile-nav-link">contact</a>
+    </div>
+  </nav>
+
+  <main class="page-content container">
+    <div class="bash-cmd">$ cat about.txt</div>
+
+    <div class="about-content">
+      <p>
+        I'm a second year computer science student at FAST, the same place where I founded <a href="https://csconnect.pk" target="_blank" class="text-accent">CS Connect Pakistan</a>. People know me for my yapping because I talk a lot when I do. To talk to computers I use C++, Python, and Java, and to talk to people I use English, Urdu, and some Arabic. I also do podcasts with the tech bros on our <a href="https://youtube.com/@csconnectpk" target="_blank" class="text-accent">YouTube channel</a>. My interests include osint, ml, hpc, and maths, I just like playing with nerdy stuff. In my free time you'll find me reading or building hobby projects to make my and others' lives easier.
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div>&copy; Azan Waseem</div>
+    </div>
+  </footer>
+
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script src="main.js?v=10"></script>
+</body>
+
+</html>

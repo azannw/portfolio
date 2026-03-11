@@ -55,6 +55,13 @@ function fetchUserIP() {
   const el = document.getElementById('user-ip');
   if (!el) return;
 
+  // Use cached IP instantly to prevent flicker on page changes
+  const cached = sessionStorage.getItem('userIP');
+  if (cached) {
+    el.textContent = cached;
+    return;
+  }
+
   const apis = [
     { url: 'https://api.ipify.org?format=json', getIP: data => data.ip },
     { url: 'https://ipapi.co/json/', getIP: data => data.ip },
@@ -69,6 +76,7 @@ function fetchUserIP() {
         const ip = api.getIP(data);
         if (ip) {
           el.textContent = ip;
+          sessionStorage.setItem('userIP', ip);
           return;
         }
       } catch (e) {
@@ -82,7 +90,7 @@ function fetchUserIP() {
 }
 
 function startTypewriter() {
-  const phrases = ["welcome :)", "i'm azan waseem"];
+  const phrases = ["welcome :)", "i'm azan waseem", "اَزان وسیم"];
   const el = document.getElementById('typewriter-text');
   if (!el) return;
 
@@ -183,7 +191,7 @@ function initPreloader(onComplete) {
     document.body.classList.remove('loading');
     // Show final typewriter text so hero isn't empty
     const heroEl = document.getElementById('typewriter-text');
-    if (heroEl) heroEl.textContent = "i'm azan waseem";
+    if (heroEl) heroEl.textContent = "اَزان وسیم";
     if (onComplete) onComplete(false);
     return;
   }

@@ -35,7 +35,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="styles.css?v=9">
+    <link rel="stylesheet" href="styles.css?v=10">
 
     <script>
       // Preload markdown file if viewing a specific blog post
@@ -62,14 +62,14 @@
     <!-- Navbar -->
     <nav class="navbar">
       <div class="container navbar-content">
-        <a href="index.html" class="logo">aw<span>.</span></a>
+        <a href="/" class="logo">aw<span>.</span></a>
 
         <div class="nav-links">
-          <a href="index.html#about" class="nav-link">about</a>
-          <a href="index.html#projects" class="nav-link">projects</a>
-          <a href="index.html#community" class="nav-link">community</a>
+          <a href="/about" class="nav-link">about</a>
+          <a href="/projects" class="nav-link">projects</a>
+          <a href="/community" class="nav-link">community</a>
           <a href="/blog" class="nav-link active">blog</a>
-          <a href="index.html#contact" class="nav-link">contact</a>
+          <a href="/contact" class="nav-link">contact</a>
         </div>
 
         <!-- Theme Toggle -->
@@ -90,19 +90,26 @@
           </svg>
         </button>
 
-        <button class="menu-toggle text-primary" onclick="window.location.href='index.html'">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="19" y1="12" x2="5" y2="12"></line>
-            <polyline points="12 19 5 12 12 5"></polyline>
-          </svg>
+        <button class="menu-toggle text-primary" id="menu-toggle" onclick="toggleMobileMenu()">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
         </button>
+      </div>
+
+      <div id="mobile-nav" class="mobile-nav">
+        <a href="/about" class="mobile-nav-link">about</a>
+        <a href="/projects" class="mobile-nav-link">projects</a>
+        <a href="/community" class="mobile-nav-link">community</a>
+        <a href="/blog" class="mobile-nav-link">blog</a>
+        <a href="/contact" class="mobile-nav-link">contact</a>
       </div>
     </nav>
 
     <!-- Blog Listing (default view, hidden by JS when viewing a post) -->
     <div id="blog-listing" class="container" style="padding-top: 100px; padding-bottom: 4rem; min-height: calc(100vh - 80px);">
       <div class="bash-cmd">$ ls ~/blog/</div>
-      <p class="text-secondary sans" style="margin-bottom: 2rem; font-size: 1rem;">Thoughts and things I've learned along the way.</p>
+      <p class="text-secondary sans" style="margin-bottom: 2rem; font-size: 1rem;">things i write when i should be doing assignments.</p>
       <div id="blog-list" class="blog-list">
         <div class="text-secondary mono" id="blog-list-loading">Loading posts...</div>
       </div>
@@ -151,7 +158,7 @@
     <!-- Footer -->
     <footer>
       <div class="container">
-        <div>&copy; 2026 Azan Waseem</div>
+        <div>&copy; Azan Waseem</div>
       </div>
     </footer>
 
@@ -160,7 +167,7 @@
       window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/insights/script.js"></script>
-    <script src="main.js?v=9"></script>
-    <script src="blog.js?v=9"></script>
+    <script src="main.js?v=10"></script>
+    <script src="blog.js?v=10"></script>
   </body>
 </html>
