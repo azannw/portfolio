@@ -137,9 +137,9 @@ function handleHashNavigation() {
 
 function toggleMobileMenu() {
   const nav = document.getElementById('mobile-nav');
-  if (nav) {
-    nav.classList.toggle('open');
-  }
+  const btn = document.getElementById('menu-toggle');
+  if (nav) nav.classList.toggle('open');
+  if (btn) btn.classList.toggle('active');
 }
 
 // ===================================
