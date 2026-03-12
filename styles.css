@@ -477,75 +477,68 @@ section {
 }
 
 /* ===================================
-   Projects — Clean List
+   Page Heading — Shared Minimal
+   =================================== */
+.page-heading {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.5px;
+}
+
+.page-subtitle {
+  font-family: var(--font-sans);
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+}
+
+/* ===================================
+   Projects — Minimal List
    =================================== */
 .projects-list {
   display: flex;
   flex-direction: column;
-  border-top: 1px solid var(--border-color);
 }
 
-.project-row {
+.project-item {
   display: block;
-  padding: 1.25rem 0;
-  border-bottom: 1px solid var(--border-color);
+  padding: 0.85rem 0;
   text-decoration: none;
   color: inherit;
-  transition: padding 0.25s ease;
 }
 
-.project-row:hover {
-  padding-left: 0.75rem;
-}
-
-.project-row-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.4rem;
-}
-
-.project-row-name {
-  font-size: 1.05rem;
+.project-name {
+  font-size: 1rem;
   font-weight: 600;
   color: var(--text-primary);
-  transition: color 0.2s ease;
+  margin-bottom: 0.15rem;
+  transition: color 0.15s ease;
 }
 
-.project-row:hover .project-row-name {
-  color: var(--accent-color);
-}
-
-.project-row-arrow {
-  font-size: 1rem;
+.project-name::after {
+  content: ' \2197';
+  font-size: 0.75em;
   color: var(--text-dim);
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition: color 0.15s ease;
 }
 
-.project-row:hover .project-row-arrow {
+.project-item:hover .project-name {
   color: var(--accent-color);
-  transform: translate(2px, -2px);
 }
 
-.project-row-desc {
+.project-item:hover .project-name::after {
+  color: var(--accent-color);
+}
+
+.project-desc {
   font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 0.5rem;
-}
-
-.project-row-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.project-row-tags span {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  letter-spacing: 0.3px;
+  line-height: 1.5;
+  margin: 0;
 }
 
 /* ===================================
@@ -649,31 +642,27 @@ section {
 .blog-row {
   display: flex;
   align-items: baseline;
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--border-color);
-  transition: background-color 0.2s;
-}
-
-.blog-row:hover {
-  background-color: var(--surface-color);
-  padding-left: 1rem;
+  padding: 0.6rem 0;
 }
 
 .blog-date {
-  width: 120px;
+  width: 100px;
   flex-shrink: 0;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--text-dim);
 }
 
 .blog-title {
-  font-size: 1.15rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 500;
   color: var(--text-primary);
+  transition: color 0.15s ease;
+  border-bottom: 1px solid transparent;
 }
 
 .blog-row:hover .blog-title {
   color: var(--accent-color);
+  border-bottom-color: var(--accent-color);
 }
 
 /* ===================================
@@ -919,17 +908,12 @@ article+footer {
     font-size: 1rem;
   }
 
-  .project-row-name {
-    font-size: 1.05rem;
+  .project-name {
+    font-size: 0.95rem;
   }
 
-  .project-row-desc {
-    font-size: 0.9rem;
-    line-height: 1.5;
-  }
-
-  .project-row {
-    padding: 1.25rem;
+  .project-desc {
+    font-size: 0.85rem;
   }
 
   .community-row-title {
