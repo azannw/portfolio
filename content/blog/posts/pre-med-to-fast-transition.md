@@ -1,5 +1,3 @@
-## How a Pre-Med Student Can Get Into FAST for Computing Programs?
-
 If you are a pre-medical student thinking about switching to Computer Science at FAST, the first thing you need to do is pause and ask yourself one simple question: **Do I really want to do this?**
 
 Because this decision changes everything.

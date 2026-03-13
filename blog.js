@@ -145,11 +145,9 @@ async function loadBlogPost(slug) {
 }
 
 function renderPost(post) {
-  const titleEl = document.getElementById('post-title');
   const dateEl = document.getElementById('post-date');
   const bodyEl = document.getElementById('post-body');
 
-  if (titleEl) titleEl.textContent = post.title;
   if (dateEl) {
     const slug = post.slug || 'post';
     dateEl.innerHTML = `<span class="bash-cmd" style="margin-bottom: 0;">$ cat ${slug}.md</span> <span>${window.formatDate ? window.formatDate(post.date) : post.date}</span>`;
@@ -224,6 +222,9 @@ function showNotFound() {
 function parseMarkdown(text) {
   if (!text) return '';
   let html = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+
+  // Strip the first heading if the post starts with one (title is already shown above)
+  html = html.replace(/^#{1,3}\s+.+\n+/, '');
 
   // Code Blocks
   html = html.replace(/```(\w+)?\r?\n([\s\S]*?)```/g, (match, lang, code) => {
