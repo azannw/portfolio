@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://azanwaseem.com/sitemap.xml
+Sitemap: https://www.azanw.com/sitemap.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1
