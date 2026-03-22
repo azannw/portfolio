@@ -490,8 +490,8 @@ section {
 .page-subtitle {
   font-family: var(--font-sans);
   color: var(--text-secondary);
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-size: 1.05rem;
+  line-height: 1.7;
   margin-bottom: 2.5rem;
 }
 
@@ -535,9 +535,9 @@ section {
 
 .project-desc {
   font-family: var(--font-sans);
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   color: var(--text-secondary);
-  line-height: 1.5;
+  line-height: 1.6;
   margin: 0;
 }
 
@@ -921,7 +921,7 @@ article+footer {
   }
 
   .project-desc {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
   }
 
   .community-row-title {
